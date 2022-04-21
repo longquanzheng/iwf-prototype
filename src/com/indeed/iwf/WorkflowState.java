@@ -50,7 +50,7 @@ public abstract class WorkflowState<I> {
      */
     abstract WorkflowStateDecision decide(List<ActivityCondition<?>> activityConditions,
                                           List<TimerCondition> timerConditions,
-                                          List<SignalCondition<?>> signalConditions,
+                                          List<SignalCondition> signalConditions,
                                           Map<String, Object> searchAttributes,
                                           Map<String, Object> queryAttributes);
 
