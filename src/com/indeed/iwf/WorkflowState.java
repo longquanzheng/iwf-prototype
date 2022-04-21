@@ -1,7 +1,9 @@
 package com.indeed.iwf;
 
-import com.indeed.iwf.condition.CompletedCondition;
-import com.indeed.iwf.condition.RequestedCondition;
+import com.indeed.iwf.condition.ActivityCondition;
+import com.indeed.iwf.condition.BaseCondition;
+import com.indeed.iwf.condition.SignalCondition;
+import com.indeed.iwf.condition.TimerCondition;
 
 import java.util.List;
 
@@ -24,30 +26,25 @@ public abstract class WorkflowState<I> {
     private final String stateId;
 
     /**
-     * Implement this method to cast an object from previous state into the input of this state
-     *
-     * @param untypedInput   the object of the input without knowing the type
-     * @param previousStateId the stateId of the previous state
-     * @return cast the input into the right type
+     * This input type is needed for deserialize encoded data into Java object
      */
-    abstract I castInput(Object untypedInput, String previousStateId);
+    abstract Class<I> getInputType();
 
     /**
      * Implement this method to decide the conditions set up for this state.
      *
-     * @param input the state input which is returned by {@link #castInput}
+     * @param input the state input which is deserialized by dataConverter with {@link #getInputType}
      * @return the requested conditions for this step
      */
-    abstract List<RequestedCondition> requestConditions(I input);
+    abstract List<BaseCondition> requestConditions(I input);
 
     /**
-     * Implement this method to decide what to do next when any of the requested condition is completed
-     * Note that this method will be executed on every condition completion rather than waiting for all of them.
-     *
-     * @param completedConditions all completed conditions that requested in {@link #requestConditions}
-     * @return
+     * Implement this method to decide what to do next when any of the requested condition is ready
+     * Note that this method will be executed on ANY condition is ready rather than waiting for all of them.
      */
-    abstract DecidingResult decideNextStates(List<CompletedCondition> completedConditions);
+    abstract WorkflowStateDecision decideNextStates(List<ActivityCondition<?>> activityConditions,
+                                                    List<TimerCondition> timerConditions,
+                                                    List<SignalCondition<?>> signalConditions);
 
     public String getStateId() {
         return stateId;

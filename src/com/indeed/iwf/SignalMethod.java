@@ -1,15 +1,15 @@
 package com.indeed.iwf;
 
-public final class SignalMethod {
+public final class SignalMethod<T> {
     private String signalName;
-    private Class signalType;
+    private Class<T> signalType;
 
-    public SignalMethod(final String signalName, final Class signalType) {
+    public SignalMethod(final String signalName, final Class<T> signalType) {
         this.signalName = signalName;
         this.signalType = signalType;
     }
 
-    public Class getSignalType() {
+    public Class<T> getSignalType() {
         return signalType;
     }
 

@@ -3,7 +3,7 @@ package com.indeed.iwf;
 import java.util.List;
 import java.util.Map;
 
-public class DecidingResult {
+public class WorkflowStateDecision {
 
     /**
      * when using this constructor, it means the completed conditions are enough so state is completing
@@ -11,7 +11,7 @@ public class DecidingResult {
      * @param nextStates             the next states that the workflow will be moved to
      * @param upsertSearchAttributes the search attributes that will be upsert
      */
-    public DecidingResult(final List<NextState> nextStates, final Map<String, Object> upsertSearchAttributes) {
+    public WorkflowStateDecision(final List<StateMovement> nextStates, final Map<String, Object> upsertSearchAttributes) {
         this.nextStates = nextStates;
         this.upsertSearchAttributes = upsertSearchAttributes;
         waitForMoreCompletedConditions = false;
@@ -22,17 +22,17 @@ public class DecidingResult {
      *
      * @return
      */
-    public static DecidingResult waitForMoreCompletedConditions() {
-        return new DecidingResult(true);
+    public static WorkflowStateDecision waitForMoreCompletedConditions() {
+        return new WorkflowStateDecision(true);
     }
 
-    private DecidingResult(boolean waitForMoreCompletedConditions) {
+    private WorkflowStateDecision(boolean waitForMoreCompletedConditions) {
         this.waitForMoreCompletedConditions = true;
         nextStates = null;
         upsertSearchAttributes = null;
     }
 
-    public List<NextState> getNextStates() {
+    public List<StateMovement> getNextStates() {
         return nextStates;
     }
 
@@ -41,7 +41,7 @@ public class DecidingResult {
     }
 
     private final boolean waitForMoreCompletedConditions;
-    private final List<NextState> nextStates;
+    private final List<StateMovement> nextStates;
     private final Map<String, Object> upsertSearchAttributes;
 
     // private final Map<String, Object> upsertMemo; TODO https://github.com/uber/cadence/issues/3729

@@ -1,15 +1,15 @@
 package com.indeed.iwf.condition;
 
-public final class TimerCondition extends RequestedCondition {
+public final class TimerCondition extends BaseCondition {
 
-    public TimerCondition(String conditionId, int firingUnixTimestamp) {
+    public TimerCondition(String conditionId, int firingUnixTimestampSeconds) {
         super(conditionId);
-        this.firingUnixTimestamp = firingUnixTimestamp;
+        this.firingUnixTimestampSeconds = firingUnixTimestampSeconds;
     }
 
-    private int firingUnixTimestamp;
+    private int firingUnixTimestampSeconds;
 
-    public int getFiringUnixTimestamp() {
-        return firingUnixTimestamp;
+    public int getFiringUnixTimestampSeconds() {
+        return firingUnixTimestampSeconds;
     }
 }

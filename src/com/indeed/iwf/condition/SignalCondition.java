@@ -1,16 +1,16 @@
 package com.indeed.iwf.condition;
 
-public final class SignalCondition<T> extends RequestedCondition {
+public final class SignalCondition<T> extends BaseCondition {
 
-    public SignalCondition(String conditionId, String signalName, Class<T> signalType) {
+    public SignalCondition(final String conditionId, final String signalName, final Class<T> signalType) {
         super(conditionId);
         this.signalName = signalName;
         this.signalType = signalType;
     }
 
-    private String signalName;
-    private Class<T> signalType;
-    private T signal;
+    private final String signalName;
+    private final Class<T> signalType;
+    private T signalValue;
 
     public String getSignalName() {
         return signalName;
@@ -20,11 +20,11 @@ public final class SignalCondition<T> extends RequestedCondition {
         return signalType;
     }
 
-    void setSignal(T sig) {
-        this.signal = sig;
+    void setSignalValue(T sig) {
+        this.signalValue = sig;
     }
 
-    public T getSignal() {
-        return this.signal;
+    public T getSignalValue() {
+        return this.signalValue;
     }
 }

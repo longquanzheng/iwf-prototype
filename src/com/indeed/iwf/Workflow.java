@@ -12,27 +12,20 @@ import java.util.List;
  * the complex technology.
  * The workflow is still defined as code but in a different way. Instead of having a whole piece of workflow method to define the
  * workflow code, you will have to split the logic and place into different states.
- *
- * @param <I> the input type of the workflow
  */
-public interface Workflow<I> {
+public interface Workflow {
     /**
-     * This input type of the workflow is required because SDK need to decode the data using dataConverter
+     * defines the states of the workflow. A state represents a step of the workflow state machine.
+     * A state can execute some activities and wait for result, set timers to wait for firing, wait for signals.
+     * Upon any of the conditions is met, a callback of the state will be executed to decide what to do next(wait for more conditions, or go to next state).
+     * See more details in the state definition.
      */
-    Class<I> getInputType();
-
-    /**
-     defines the states of the workflow. A state represents a step of the workflow state machine.
-     *                  A state can execute some activities and wait for result, set timers to wait for firing, wait for signals.
-     *                  Upon any of the conditions is met, a callback of the state will be executed to decide what to do next(wait for more conditions, or go to next state).
-     *                  See more details in the state definition.
-     */
-    List<WorkflowState> getStates();
+    List<WorkflowState<?>> getStates();
 
     /**
      * register all the signal methods supported by this workflow.
      */
-    List<SignalMethod> getSignalMethods();
+    List<SignalMethod<?>> getSignalMethods();
 
     /**
      * defines all the query methods supported by this workflow.
