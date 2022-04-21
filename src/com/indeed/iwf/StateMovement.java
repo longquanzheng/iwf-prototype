@@ -1,6 +1,10 @@
 package com.indeed.iwf;
 
 public class StateMovement {
+    
+    public static StateMovement COMPLETING_WORKFLOW = new StateMovement("_SYS_COMPLETING_WORKFLOW", null);
+    public static StateMovement FAILING_WORKFLOW = new StateMovement("_SYS_FAILING_WORKFLOW", null);
+
     private final String stateId;
     private final Object nextStateInput;
 

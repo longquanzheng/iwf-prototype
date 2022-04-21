@@ -8,14 +8,6 @@ import com.indeed.iwf.condition.TimerCondition;
 import java.util.List;
 
 public abstract class WorkflowState<I> {
-
-    // Below are preserved StateIds
-    String STARTED_STATE_ID = "__Started__";
-    String COMPLETED_STATE_ID = "__Completed__";
-    String FAILED_STATE_ID = "__Failed__";
-    String TERMINATED_STATE_ID = "__Terminated__";
-    String CANCELED_STATE_ID = "__Canceled__";
-
     /**
      * @param stateId a unique identifier of the state
      */
