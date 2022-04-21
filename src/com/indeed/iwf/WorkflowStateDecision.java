@@ -4,17 +4,23 @@ import java.util.List;
 import java.util.Map;
 
 public class WorkflowStateDecision {
+    private final boolean needMoreReadyConditions;
+    private final List<StateMovement> nextStates;
+    private final Map<String, Object> upsertSearchAttributes;
+    private final Map<String, Object> upsertQueryAttributes;
 
     /**
      * when using this constructor, it means the completed conditions are enough so state is completing
      *
      * @param nextStates             the next states that the workflow will be moved to
      * @param upsertSearchAttributes the search attributes that will be upsert
+     * @param upsertQueryAttributes  the query attributes that will be upsert
      */
-    public WorkflowStateDecision(final List<StateMovement> nextStates, final Map<String, Object> upsertSearchAttributes) {
+    public WorkflowStateDecision(final List<StateMovement> nextStates, final Map<String, Object> upsertSearchAttributes, final Map<String, Object> upsertQueryAttributes) {
         this.nextStates = nextStates;
         this.upsertSearchAttributes = upsertSearchAttributes;
-        waitForMoreCompletedConditions = false;
+        this.upsertQueryAttributes = upsertQueryAttributes;
+        needMoreReadyConditions = false;
     }
 
     /**
@@ -22,14 +28,15 @@ public class WorkflowStateDecision {
      *
      * @return
      */
-    public static WorkflowStateDecision waitForMoreCompletedConditions() {
+    public static WorkflowStateDecision WaitForMoreConditions() {
         return new WorkflowStateDecision(true);
     }
 
-    private WorkflowStateDecision(boolean waitForMoreCompletedConditions) {
-        this.waitForMoreCompletedConditions = true;
+    private WorkflowStateDecision(boolean needMoreReadyConditions) {
+        this.needMoreReadyConditions = true;
         nextStates = null;
         upsertSearchAttributes = null;
+        upsertQueryAttributes = null;
     }
 
     public List<StateMovement> getNextStates() {
@@ -40,10 +47,11 @@ public class WorkflowStateDecision {
         return upsertSearchAttributes;
     }
 
-    private final boolean waitForMoreCompletedConditions;
-    private final List<StateMovement> nextStates;
-    private final Map<String, Object> upsertSearchAttributes;
+    public Map<String, Object> getUpsertQueryAttributes() {
+        return upsertQueryAttributes;
+    }
 
-    // private final Map<String, Object> upsertMemo; TODO https://github.com/uber/cadence/issues/3729
-
+    public boolean needMoreReadyConditions() {
+        return needMoreReadyConditions;
+    }
 }

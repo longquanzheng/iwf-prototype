@@ -28,11 +28,14 @@ public interface Workflow {
     List<SignalMethod<?>> getSignalMethods();
 
     /**
-     * defines all the query methods supported by this workflow.
-     *                     NOTE: different from Cadence/Temporal, a query method is not executed throw Cadence/Temporal workflow worker.
-     *                     It won't run into non-deterministic issues, no matter how you modify it.
+     * register all the search attributes supported by this workflow.
      */
-    List<QueryMethod> getQueryMethods();
+    List<SearchAttribute<?>> getSearchAttributes();
+
+    /**
+     * register all the query attributes supported by this workflow.
+     */
+    List<QueryAttribute<?>> getQueryAttributes();
 
     /**
      * Because the output type can be changed which causes data cannot be decoded to the new type.
