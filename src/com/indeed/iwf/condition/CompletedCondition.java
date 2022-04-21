@@ -1,18 +1,18 @@
-package com.indeed.iwf;
+package com.indeed.iwf.condition;
 
-abstract class CompletedCondition {
+public abstract class CompletedCondition {
 
-    public CompletedCondition(String conditionID, final RequestedCondition requestedCondition) {
-        this.conditionID = conditionID;
+    public CompletedCondition(String conditionId, final RequestedCondition requestedCondition) {
+        this.conditionId = conditionId;
         this.requestedCondition = requestedCondition;
     }
 
-    private String conditionID;
+    private String conditionId;
     private RequestedCondition requestedCondition;
     private Boolean completed;
 
-    public String getConditionID() {
-        return conditionID;
+    public String getConditionId() {
+        return conditionId;
     }
 
     void setCompleted(boolean succ) {

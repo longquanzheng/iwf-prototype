@@ -1,9 +1,9 @@
-package com.indeed.iwf;
+package com.indeed.iwf.condition;
 
 public final class ActivityCondition<O> extends RequestedCondition {
 
-    public ActivityCondition(String conditionID, String activityType, Object input, Class<O> outputType, int timeoutInSeconds) {
-        super(conditionID);
+    public ActivityCondition(String conditionId, String activityType, Object input, Class<O> outputType, int timeoutInSeconds) {
+        super(conditionId);
         this.activityType = activityType;
         this.input = input;
         this.outputType = outputType;

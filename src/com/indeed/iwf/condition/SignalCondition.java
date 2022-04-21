@@ -1,9 +1,9 @@
-package com.indeed.iwf;
+package com.indeed.iwf.condition;
 
 public final class SignalCondition<T> extends RequestedCondition {
 
-    public SignalCondition(String conditionID, String signalName, Class<T> signalType) {
-        super(conditionID);
+    public SignalCondition(String conditionId, String signalName, Class<T> signalType) {
+        super(conditionId);
         this.signalName = signalName;
         this.signalType = signalType;
     }

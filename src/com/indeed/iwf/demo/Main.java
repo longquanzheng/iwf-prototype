@@ -1,4 +1,4 @@
-package com.indeed.iwf;
+package com.indeed.iwf.demo;
 
 public class Main {
 

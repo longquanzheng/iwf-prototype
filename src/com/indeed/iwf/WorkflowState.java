@@ -1,8 +1,13 @@
 package com.indeed.iwf;
 
+import com.indeed.iwf.condition.CompletedCondition;
+import com.indeed.iwf.condition.RequestedCondition;
+
 import java.util.List;
 
-public abstract class WorkflowState<I, O> {
+public abstract class WorkflowState<I> {
+
+    // Below are preserved StateIds
     String STARTED_STATE_ID = "__Started__";
     String COMPLETED_STATE_ID = "__Completed__";
     String FAILED_STATE_ID = "__Failed__";
@@ -10,49 +15,42 @@ public abstract class WorkflowState<I, O> {
     String CANCELED_STATE_ID = "__Canceled__";
 
     /**
-     * @param stateID    a unique identifier of the state
-     * @param outputType the output type of the state so that SDK can decode the data using dataConverter
+     * @param stateId a unique identifier of the state
      */
-    public WorkflowState(String stateID, Class<O> outputType) {
-        this.stateID = stateID;
-        this.outputType = outputType;
+    public WorkflowState(String stateId) {
+        this.stateId = stateId;
     }
 
-    private final String stateID;
-    private final Class<O> outputType;
+    private final String stateId;
 
     /**
-     * Implement this method to convert a source input(an output of a previous state, or workflow input) into the input of the state
+     * Implement this method to cast an object from previous state into the input of this state
      *
-     * @param sourceInput   the object of the source input(an output of a previous state, or workflow input)
-     * @param sourceStateID the stateID of the previous state
-     * @return the converted result
+     * @param untypedInput   the object of the input without knowing the type
+     * @param previousStateId the stateId of the previous state
+     * @return cast the input into the right type
      */
-    abstract I convertToInputType(Object sourceInput, String sourceStateID);
+    abstract I castInput(Object untypedInput, String previousStateId);
 
     /**
      * Implement this method to decide the conditions set up for this state.
      *
-     * @param input the state input which is returned by {@link #convertToInputType}
+     * @param input the state input which is returned by {@link #castInput}
      * @return the requested conditions for this step
      */
-    abstract List<RequestedCondition> prepareDecidingConditions(I input);
+    abstract List<RequestedCondition> requestConditions(I input);
 
     /**
      * Implement this method to decide what to do next when any of the requested condition is completed
      * Note that this method will be executed on every condition completion rather than waiting for all of them.
      *
-     * @param completedConditions all completed conditions that requested in {@link #prepareDecidingConditions}
+     * @param completedConditions all completed conditions that requested in {@link #requestConditions}
      * @return
      */
-    abstract DecidingResult<O> decideNextStates(List<CompletedCondition> completedConditions);
+    abstract DecidingResult decideNextStates(List<CompletedCondition> completedConditions);
 
-    public String getStateID() {
-        return stateID;
-    }
-
-    public Class<O> getOutputType() {
-        return outputType;
+    public String getStateId() {
+        return stateId;
     }
 }
 
