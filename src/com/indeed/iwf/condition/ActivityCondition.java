@@ -4,9 +4,9 @@ public final class ActivityCondition<O> extends BaseCondition {
 
     // below are fields supplied by user code via constructor
     private String activityType;
-    private Object input;
+    private Object[] input;
     private Class<O> outputType;
-    private int timeoutInSeconds;
+    private ActivityOptions activityOptions;
 
     // below are fields managed by SDK/workflow engine
     // the values are provided when the activity are closed
@@ -14,15 +14,12 @@ public final class ActivityCondition<O> extends BaseCondition {
     private ActivityStatus activityStatus;
     private ActivityTimeoutType activityTimeoutType;
 
-    // TODO: other optional configs: 1. retryOption, 2. tasklist 3, other detailed timeouts(e.g. startToClose, heartbeat)
-
-    public ActivityCondition(final String conditionId, final String activityType, final Object input,
-                             final Class<O> outputType, final int timeoutInSeconds) {
-        super(conditionId);
+    public ActivityCondition(final String activityType, final Class<O> outputType, ActivityOptions options, final Object... input) {
+        super(options.getActivityConditionId());
         this.activityType = activityType;
         this.input = input;
         this.outputType = outputType;
-        this.timeoutInSeconds = timeoutInSeconds;
+        this.activityOptions = options;
     }
 
     String getActivityType() {
@@ -33,8 +30,8 @@ public final class ActivityCondition<O> extends BaseCondition {
         return outputType;
     }
 
-    int getTimeoutInSeconds() {
-        return timeoutInSeconds;
+    ActivityOptions getActivityOptions() {
+        return activityOptions;
     }
 
     Object getInput() {

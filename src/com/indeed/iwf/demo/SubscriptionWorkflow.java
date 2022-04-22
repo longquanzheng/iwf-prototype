@@ -9,6 +9,7 @@ import com.indeed.iwf.Workflow;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
 import com.indeed.iwf.condition.ActivityCondition;
+import com.indeed.iwf.condition.ActivityOptions;
 import com.indeed.iwf.condition.BaseCondition;
 import com.indeed.iwf.condition.SignalCondition;
 import com.indeed.iwf.condition.TimerCondition;
@@ -98,7 +99,7 @@ class WelcomeEmailState implements WorkflowState<Customer> {
     @Override
     public List<BaseCondition> prepare(final Customer customer, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
         return Arrays.asList(
-                new ActivityCondition<>("", "SubscriptionActivities::sendWelcomeEmail", customer, Void.class, 30)
+                new ActivityCondition<>("SubscriptionActivities::sendWelcomeEmail", Void.class, new ActivityOptions(30), customer)
         );
     }
 
@@ -246,8 +247,9 @@ class ChargeCurrentPeriodState implements WorkflowState<Void> {
     @Override
     public List<BaseCondition> prepare(final Void nothing, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
         final Customer customer = (Customer) queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
+        final int currentPeriod = (int) queryAttributes.get(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER);
         return Arrays.asList(
-                new ActivityCondition<>("", "SubscriptionActivities::chargeCustomerForBillingPeriod", customer, Void.class, 30)
+                new ActivityCondition<>("SubscriptionActivities::chargeCustomerForBillingPeriod", Void.class, new ActivityOptions(30), customer, currentPeriod)
         );
     }
 
@@ -279,7 +281,7 @@ class SubscriptionOverState implements WorkflowState<Void> {
     public List<BaseCondition> prepare(final Void nothing, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
         final Customer customer = (Customer) queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
         return Arrays.asList(
-                new ActivityCondition<>("", "SubscriptionActivities::sendSubscriptionOverEmail", customer, Void.class, 30)
+                new ActivityCondition<>("SubscriptionActivities::sendSubscriptionOverEmail", Void.class, new ActivityOptions(30), customer)
         );
     }
 
