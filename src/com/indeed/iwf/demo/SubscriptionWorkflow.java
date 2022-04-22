@@ -135,7 +135,7 @@ class CancelSubscriptionState implements WorkflowState<Void> {
     @Override
     public List<BaseCondition> prepare(final Void nothing, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
         return Arrays.asList(
-                new SignalCondition("", SubscriptionWorkflow.SIGNAL_METHOD_CANCEL_SUBSCRIPTION)
+                new SignalCondition(SubscriptionWorkflow.SIGNAL_METHOD_CANCEL_SUBSCRIPTION)
         );
     }
 
@@ -166,7 +166,7 @@ class UpdateChargeAmountState implements WorkflowState<Void> {
     @Override
     public List<BaseCondition> prepare(final Void nothing, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
         return Arrays.asList(
-                new SignalCondition("", SubscriptionWorkflow.SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT)
+                new SignalCondition(SubscriptionWorkflow.SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT)
         );
     }
 
@@ -207,7 +207,7 @@ class WaitForPeriodState implements WorkflowState<Void> {
         final Customer customer = (Customer) queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
 
         return Arrays.asList(
-                new TimerCondition("", (int) (System.currentTimeMillis() / 1000) + customer.getSubscription().getPeriodsInSubscription())
+                new TimerCondition((int) (System.currentTimeMillis() / 1000) + customer.getSubscription().getPeriodsInSubscription())
         );
     }
 
