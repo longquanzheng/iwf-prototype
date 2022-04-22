@@ -12,6 +12,7 @@ These two factors together have made things extremely difficult for engineers to
 
 Instead of writing the Cadence workflow, we let users write workflow in code by defining a set of **WorkflowState**. 
 Each **WorkflowState** defines two things: **prepare** and **decide** 
+
 **prepare** will request for signals, timers, activity, etc 
 When all/any precondition is met, the **decide** is invoked to get the next states to jump into. 
 
