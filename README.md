@@ -45,6 +45,7 @@ And there is no need to worry about non-deterministic errors.
   * There is no restriction anymore for writing your workflow code. You can call RPC in workflow without using activity if you like. 
 * It will be super easy to debug when things go wrong. The workflow history will preseve the input/output of each call of **prepare** and **decide** 
 * It will be super easy to make code changes. No need to use any [versioning](https://stackoverflow.com/questions/65007136/uber-cadence-workflow-versioning/65029001#65029001) and worry about workflow replay. 
+  * No need to write any replay code anymore to protect the determinism
 * It will be super easy to monitor and operate. There is no decision task concept anymore. Everything is RPC between your code and the engine server. 
 
 
