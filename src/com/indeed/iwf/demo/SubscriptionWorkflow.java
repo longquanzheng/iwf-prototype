@@ -290,7 +290,7 @@ class SubscriptionOverState implements WorkflowState<Void> {
                                         final List<SignalCondition> signalConditions, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
         return new WorkflowStateDecision(
                 Arrays.asList(
-                        new StateMovement(WF_STATE_WAIT_FOR_NEXT_PERIOD, null)
+                        COMPLETING_WORKFLOW
                 ), null, null
 
         );
