@@ -35,3 +35,20 @@ And there is no need to worry about non-deterministic errors.
 
 * We may lose some readability of the workflow code. However, we can write higher lever abstraction code to make it cleaner.
 * We will lose some flexibility of mutating internal workflow states compared to native Cadence workflow code. 
+* We will lose some strongly typing(use type casting instead) when writing workflow code
+
+## Benefits
+
+**With the same power of the native/original Cadence workflow...**
+
+* It will be super easy to learn and understand. Everything is straightfoward and no trciky things at all
+  * There is no restriction anymore for writing your workflow code. You can call RPC in workflow without using activity if you like. 
+* It will be super easy to debug when things go wrong. The workflow history will preseve the input/output of each call of **prepare** and **decide** 
+* It will be super easy to make code changes. No need to use any [versioning](https://stackoverflow.com/questions/65007136/uber-cadence-workflow-versioning/65029001#65029001) and worry about workflow replay. 
+* It will be super easy to monitor and operate. There is no decision task concept anymore. Everything is RPC between your code and the engine server. 
+
+
+## Example
+See this [prototype example](https://github.com/longquanzheng/iwf/blob/main/src/com/indeed/iwf/demo/SubscriptionWorkflow.java) as a translation of the [Example Subscription workflow](https://cadenceworkflow.io/docs/concepts/workflows/#example)
+
+Note that the SDK in this repo is just a prototype. There are lots of improvement can be done to make the API more friendly. 
