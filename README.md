@@ -51,6 +51,8 @@ And there is no need to worry about non-deterministic errors.
 
 
 ## Example
-See this [prototype example](https://github.com/longquanzheng/iwf/blob/main/src/com/indeed/iwf/demo/SubscriptionWorkflow.java) as a translation of the [Example Subscription workflow](https://cadenceworkflow.io/docs/concepts/workflows/#example)
+See this [example](https://github.com/longquanzheng/iwf/blob/main/src/com/indeed/iwf/demo/subscription) as a translation
+of the [Subscription workflow](https://cadenceworkflow.io/docs/concepts/workflows/#example)
 
-Note that the SDK in this repo is just a prototype. There are lots of improvement can be done to make the API more friendly. 
+Note that the SDK in this repo is just a prototype. There are lots of improvement can be done to make the API more
+friendly. 
