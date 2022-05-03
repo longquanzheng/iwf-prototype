@@ -34,7 +34,9 @@ And there is no need to worry about non-deterministic errors.
 
 ## Limitation
 
-* We may lose some readability of the workflow code. However, we can write higher lever abstraction code to make it cleaner.
+* We may lose some readability of the workflow code. However, 
+  * Workflow can be better visulized. A flow diagram can be generated using a tool. 
+  * In real world use cases, the business logic could get more readable because we don't have to use versioning anymore. 
 * We will lose some flexibility of mutating internal workflow states compared to native Cadence workflow code. 
 * We will lose some strongly typing(use type casting instead) when writing workflow code
 
@@ -42,11 +44,12 @@ And there is no need to worry about non-deterministic errors.
 
 **With the same power of the native/original Cadence workflow...**
 
+* No more [versioning](https://stackoverflow.com/questions/65007136/uber-cadence-workflow-versioning/65029001#65029001) in workflow code when making code change. This will make maintainence a lot easier and the production code looks much cleaner.
+  * Every code change in workflow will take affect immediately for existing started workflow runs. 
+  * No need to write any replay code anymore to protect the determinism
 * It will be super easy to learn and understand. Everything is straightfoward and no trciky things at all
   * There is no restriction anymore for writing your workflow code. You can call RPC in workflow without using activity if you like. 
 * It will be super easy to debug when things go wrong. The workflow history will preseve the input/output of each call of **prepare** and **decide** 
-* It will be super easy to make code changes. No need to use any [versioning](https://stackoverflow.com/questions/65007136/uber-cadence-workflow-versioning/65029001#65029001) and worry about workflow replay. 
-  * No need to write any replay code anymore to protect the determinism
 * It will be super easy to monitor and operate. There is no decision task concept anymore. Everything is RPC between your code and the engine server. 
 
 
