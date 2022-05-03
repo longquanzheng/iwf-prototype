@@ -50,7 +50,9 @@ And there is no need to worry about non-deterministic errors.
 * It will be super easy to learn and understand. Everything is straightfoward and no trciky things at all
   * There is no restriction anymore for writing your workflow code. You can call RPC in workflow without using activity if you like. 
 * It will be super easy to debug when things go wrong. The workflow history will preseve the input/output of each call of **prepare** and **decide** 
-* It will be super easy to monitor and operate. There is no decision task concept anymore. Everything is RPC between your code and the engine server.
+* It will be super easy to monitor and operate. 
+  * The monitoring is simplifed. There is no need to monitoring decision task timeout/failure etc.
+  * There is no decision task concept anymore. The runtime environment is simplifed to request-response manner so debugging is extremely straightfoward. 
 * It will be a lot easier to write unit tests. 
   * Only traditional framework(mockito/Junit) is needed.
   * No need to use extra imbedded SDK to write testing code. 
