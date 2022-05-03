@@ -1,4 +1,4 @@
-package com.indeed.iwf.demo;
+package com.indeed.iwf.demo.subscription.models;
 
 public class Subscription {
     public int getPeriodsInSubscription() {
