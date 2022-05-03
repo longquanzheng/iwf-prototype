@@ -54,6 +54,8 @@ And there is no need to worry about non-deterministic errors.
 * It will be a lot easier to write unit tests. 
   * Only traditional framework(mockito/Junit) is needed.
   * No need to use extra imbedded SDK to write testing code. 
+* Better memory/threading usage with lightweight threading implementation 
+  * This is a big problem for Cadence Java SDK as the Workflow thread is JVM thread. With this approach, all languages will always be able to use lightweight threading -- because the actual workflow can be implemented in Golang Cadence SDK. 
 
 
 ## Example
