@@ -8,12 +8,9 @@ import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
 import com.indeed.iwf.condition.ActivityCondition;
 import com.indeed.iwf.condition.ActivityOptions;
+import com.indeed.iwf.condition.ConditionResults;
 import com.indeed.iwf.condition.Prep;
-import com.indeed.iwf.condition.SignalCondition;
-import com.indeed.iwf.condition.TimerCondition;
 import com.indeed.iwf.demo.subscription.models.Customer;
-
-import java.util.List;
 
 import static com.indeed.iwf.StateMovement.COMPLETING_WORKFLOW;
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER;
@@ -40,8 +37,7 @@ class SubscriptionOverState implements WorkflowState<Void> {
     }
 
     @Override
-    public WorkflowStateDecision decide(final Void nothing, final List<ActivityCondition<?>> activityConditions, final List<TimerCondition> timerConditions,
-                                        final List<SignalCondition> signalConditions,
+    public WorkflowStateDecision decide(final Void nothing, final ConditionResults conditionResults,
                                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return new WorkflowStateDecision(
                 COMPLETING_WORKFLOW

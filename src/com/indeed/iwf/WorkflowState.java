@@ -1,11 +1,7 @@
 package com.indeed.iwf;
 
-import com.indeed.iwf.condition.ActivityCondition;
+import com.indeed.iwf.condition.ConditionResults;
 import com.indeed.iwf.condition.Prep;
-import com.indeed.iwf.condition.SignalCondition;
-import com.indeed.iwf.condition.TimerCondition;
-
-import java.util.List;
 
 public interface WorkflowState<I> {
     /**
@@ -50,10 +46,7 @@ public interface WorkflowState<I> {
      * TODO similar as above, this can be QueryAttributesRW and SearchAttributesRW (read+write)
      * also we should have better abstraction of activityConditions/timerConditions/signalConditions for better strongly typing experience
      */
-    WorkflowStateDecision decide(I input,
-                                 List<ActivityCondition<?>> activityConditions,
-                                 List<TimerCondition> timerConditions,
-                                 List<SignalCondition> signalConditions,
+    WorkflowStateDecision decide(final I input, final ConditionResults conditionResults,
                                  final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
 }
 

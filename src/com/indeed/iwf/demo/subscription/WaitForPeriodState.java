@@ -7,14 +7,12 @@ import com.indeed.iwf.SearchAttributesRW;
 import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
-import com.indeed.iwf.condition.ActivityCondition;
+import com.indeed.iwf.condition.ConditionResults;
 import com.indeed.iwf.condition.Prep;
-import com.indeed.iwf.condition.SignalCondition;
 import com.indeed.iwf.condition.TimerCondition;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER;
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER;
@@ -44,12 +42,11 @@ class WaitForPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public WorkflowStateDecision decide(final Void nothing, final List<ActivityCondition<?>> activityConditions, final List<TimerCondition> timerConditions,
-                                        final List<SignalCondition> signalConditions,
+    public WorkflowStateDecision decide(final Void nothing, final ConditionResults conditionResults,
                                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         ArrayList<StateMovement> nextStates = new ArrayList();
-        final Customer customer = (Customer) queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
-        int currentPeriodNum = (int) queryAttributes.get(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER);
+        final Customer customer = queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
+        int currentPeriodNum = queryAttributes.get(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER);
         if (currentPeriodNum < customer.getSubscription().getPeriodsInSubscription()) {
             queryAttributes.upsert(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER, +1); // starting from 0
             nextStates.add(new StateMovement(WF_STATE_CHARGE_CURRENT_PERIOD));

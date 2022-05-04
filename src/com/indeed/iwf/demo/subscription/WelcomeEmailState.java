@@ -9,14 +9,9 @@ import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
 import com.indeed.iwf.condition.ActivityCondition;
 import com.indeed.iwf.condition.ActivityOptions;
+import com.indeed.iwf.condition.ConditionResults;
 import com.indeed.iwf.condition.Prep;
-import com.indeed.iwf.condition.SignalCondition;
-import com.indeed.iwf.condition.TimerCondition;
 import com.indeed.iwf.demo.subscription.models.Customer;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER;
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER;
@@ -45,11 +40,10 @@ class WelcomeEmailState implements WorkflowState<Customer> {
     }
 
     @Override
-    public WorkflowStateDecision decide(final Customer customer, final List<ActivityCondition<?>> activityConditions, final List<TimerCondition> timerConditions, final List<SignalCondition> signalConditions,
+    public WorkflowStateDecision decide(final Customer customer, final ConditionResults conditionResults,
                                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
-        Map<String, Object> attrs = new HashMap<>();
-        attrs.put(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER, 0); // starting from 0
-        attrs.put(QUERY_ATTRIBUTE_CUSTOMER, customer);
+        queryAttributes.upsert(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER, 0); // starting from 0
+        queryAttributes.upsert(QUERY_ATTRIBUTE_CUSTOMER, customer);
 
         return new WorkflowStateDecision(
                 new StateMovement(WF_STATE_CANCEL_SUBSCRIPTION),
