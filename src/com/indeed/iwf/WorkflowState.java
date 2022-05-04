@@ -10,7 +10,7 @@ public interface WorkflowState<I> {
     String getStateId();
 
     /**
-     * this decides whether to load all the search attributes into {@link #decide} method
+     * this decides whether to load all the search attributes into {@link #decide} and {@link #prepare} method
      * default to true
      */
     default boolean loadAllSearchAttributes() {
@@ -18,7 +18,7 @@ public interface WorkflowState<I> {
     }
 
     /**
-     * this decides whether to load all the query attributes into {@link #decide} method
+     * this decides whether to load all the query attributes into {@link #decide} and {@link #prepare} method
      * default to true
      */
     default boolean loadAllQueryAttributes() {
@@ -26,7 +26,7 @@ public interface WorkflowState<I> {
     }
 
     /**
-     * This input type is needed for deserialize encoded data into Java object
+     * This input type is needed for deserializing data back into Java object
      */
     Class<I> getInputType();
 
@@ -41,7 +41,7 @@ public interface WorkflowState<I> {
     Prep prepare(I input, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes);
 
     /**
-     * Implement this method to decide what to do next when any of the requested condition is ready
+     * Implement this method to decide what to do next when requested conditions are ready
      */
     WorkflowStateDecision decide(final I input, final ConditionResults conditionResults,
                                  final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
