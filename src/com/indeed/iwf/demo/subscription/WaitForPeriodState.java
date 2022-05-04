@@ -52,14 +52,13 @@ class WaitForPeriodState implements WorkflowState<Void> {
         int currentPeriodNum = (int) queryAttributes.get(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER);
         if (currentPeriodNum < customer.getSubscription().getPeriodsInSubscription()) {
             queryAttributes.upsert(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER, +1); // starting from 0
-            nextStates.add(new StateMovement(WF_STATE_CHARGE_CURRENT_PERIOD, null));
+            nextStates.add(new StateMovement(WF_STATE_CHARGE_CURRENT_PERIOD));
         } else {
-            nextStates.add(new StateMovement(WF_STATE_SUBSCRIPTION_OVER, null));
+            nextStates.add(new StateMovement(WF_STATE_SUBSCRIPTION_OVER));
         }
 
         return new WorkflowStateDecision(
                 nextStates
-
         );
     }
 }
