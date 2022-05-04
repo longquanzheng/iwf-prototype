@@ -18,6 +18,10 @@ public class StateMovement {
         this.nextStateInput = nextStateInput;
     }
 
+    public StateMovement(final String stateId) {
+        this(stateId, null);
+    }
+
     public String getStateId() {
         return stateId;
     }
