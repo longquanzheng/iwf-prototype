@@ -2,6 +2,9 @@ package com.indeed.iwf.condition;
 
 import java.util.List;
 
+/**
+ * This is the container of all requested conditions' results/statuses
+ */
 public class ConditionResults {
 
     public List<ActivityCondition> getAllActivityConditions() {

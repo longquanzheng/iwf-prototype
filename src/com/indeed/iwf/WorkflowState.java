@@ -34,7 +34,7 @@ public interface WorkflowState<I> {
      * Implement this method to decide the conditions set up for this state.
      *
      * @param input            the state input which is deserialized by dataConverter with {@link #getInputType}
-     * @param queryAttributes  TODO we probably can remove these two and calculate the upsertion based on input param so it would be SearchAttributesRO QueryAttributesRO (readonly)
+     * @param queryAttributes
      * @param searchAttributes
      * @return the requested conditions for this step
      */
@@ -42,9 +42,6 @@ public interface WorkflowState<I> {
 
     /**
      * Implement this method to decide what to do next when any of the requested condition is ready
-     * Note that this method will be executed on ANY condition is ready rather than waiting for all of them.
-     * TODO similar as above, this can be QueryAttributesRW and SearchAttributesRW (read+write)
-     * also we should have better abstraction of activityConditions/timerConditions/signalConditions for better strongly typing experience
      */
     WorkflowStateDecision decide(final I input, final ConditionResults conditionResults,
                                  final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
