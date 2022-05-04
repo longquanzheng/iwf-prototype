@@ -5,7 +5,7 @@ import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
 import com.indeed.iwf.condition.ActivityCondition;
 import com.indeed.iwf.condition.ActivityOptions;
-import com.indeed.iwf.condition.BaseCondition;
+import com.indeed.iwf.condition.Prep;
 import com.indeed.iwf.condition.SignalCondition;
 import com.indeed.iwf.condition.TimerCondition;
 import com.indeed.iwf.demo.subscription.models.Customer;
@@ -35,8 +35,8 @@ class WelcomeEmailState implements WorkflowState<Customer> {
     }
 
     @Override
-    public List<BaseCondition> prepare(final Customer customer, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
-        return Arrays.asList(
+    public Prep prepare(final Customer customer, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
+        return Prep.prepareAnyConditionCompleted(
                 new ActivityCondition<>("SubscriptionActivities::sendWelcomeEmail", Void.class, new ActivityOptions(30), customer)
         );
     }

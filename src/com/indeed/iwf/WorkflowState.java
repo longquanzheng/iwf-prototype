@@ -1,7 +1,7 @@
 package com.indeed.iwf;
 
 import com.indeed.iwf.condition.ActivityCondition;
-import com.indeed.iwf.condition.BaseCondition;
+import com.indeed.iwf.condition.Prep;
 import com.indeed.iwf.condition.SignalCondition;
 import com.indeed.iwf.condition.TimerCondition;
 
@@ -41,7 +41,7 @@ public interface WorkflowState<I> {
      * @param input the state input which is deserialized by dataConverter with {@link #getInputType}
      * @return the requested conditions for this step
      */
-    List<BaseCondition> prepare(I input, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes);
+    Prep prepare(I input, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes);
 
     /**
      * Implement this method to decide what to do next when any of the requested condition is ready

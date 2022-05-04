@@ -3,7 +3,7 @@ package com.indeed.iwf.demo.subscription;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
 import com.indeed.iwf.condition.ActivityCondition;
-import com.indeed.iwf.condition.BaseCondition;
+import com.indeed.iwf.condition.Prep;
 import com.indeed.iwf.condition.SignalCondition;
 import com.indeed.iwf.condition.TimerCondition;
 
@@ -27,8 +27,8 @@ public class CancelSubscriptionState implements WorkflowState<Void> {
     }
 
     @Override
-    public List<BaseCondition> prepare(final Void nothing, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
-        return Arrays.asList(
+    public Prep prepare(final Void nothing, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
+        return Prep.prepareAnyConditionCompleted(
                 new SignalCondition(SubscriptionWorkflow.SIGNAL_METHOD_CANCEL_SUBSCRIPTION)
         );
     }
