@@ -1,5 +1,9 @@
 package com.indeed.iwf.demo.subscription;
 
+import com.indeed.iwf.QueryAttributesRO;
+import com.indeed.iwf.QueryAttributesRW;
+import com.indeed.iwf.SearchAttributesRO;
+import com.indeed.iwf.SearchAttributesRW;
 import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
@@ -33,8 +37,8 @@ class WaitForPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public Prep prepare(final Void nothing, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
-        final Customer customer = (Customer) queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
+    public Prep prepare(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
+        final Customer customer = queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
 
         return Prep.prepareAnyConditionCompleted(
                 new TimerCondition((int) (System.currentTimeMillis() / 1000) + customer.getSubscription().getPeriodsInSubscription())
@@ -43,7 +47,8 @@ class WaitForPeriodState implements WorkflowState<Void> {
 
     @Override
     public WorkflowStateDecision decide(final Void nothing, final List<ActivityCondition<?>> activityConditions, final List<TimerCondition> timerConditions,
-                                        final List<SignalCondition> signalConditions, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
+                                        final List<SignalCondition> signalConditions,
+                                        final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         ArrayList<StateMovement> nextStates = new ArrayList();
         final Customer customer = (Customer) queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
         Map<String, Object> attrs = new HashMap<>();

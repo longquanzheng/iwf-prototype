@@ -6,7 +6,6 @@ import com.indeed.iwf.condition.SignalCondition;
 import com.indeed.iwf.condition.TimerCondition;
 
 import java.util.List;
-import java.util.Map;
 
 public interface WorkflowState<I> {
     /**
@@ -43,7 +42,7 @@ public interface WorkflowState<I> {
      * @param searchAttributes
      * @return the requested conditions for this step
      */
-    Prep prepare(I input, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes);
+    Prep prepare(I input, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes);
 
     /**
      * Implement this method to decide what to do next when any of the requested condition is ready
@@ -55,8 +54,7 @@ public interface WorkflowState<I> {
                                  List<ActivityCondition<?>> activityConditions,
                                  List<TimerCondition> timerConditions,
                                  List<SignalCondition> signalConditions,
-                                 Map<String, Object> searchAttributes,
-                                 Map<String, Object> queryAttributes);
+                                 final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
 }
 
 

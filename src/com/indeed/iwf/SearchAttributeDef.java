@@ -1,10 +1,10 @@
 package com.indeed.iwf;
 
-public final class SearchAttribute<T> {
+public final class SearchAttributeDef<T> {
     private String key;
     private Class<T> type;
 
-    public SearchAttribute(final String key, final Class<T> type) {
+    public SearchAttributeDef(final String key, final Class<T> type) {
         this.key = key;
         this.type = type;
     }

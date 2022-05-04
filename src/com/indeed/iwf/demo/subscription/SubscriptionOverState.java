@@ -1,5 +1,9 @@
 package com.indeed.iwf.demo.subscription;
 
+import com.indeed.iwf.QueryAttributesRO;
+import com.indeed.iwf.QueryAttributesRW;
+import com.indeed.iwf.SearchAttributesRO;
+import com.indeed.iwf.SearchAttributesRW;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
 import com.indeed.iwf.condition.ActivityCondition;
@@ -11,7 +15,6 @@ import com.indeed.iwf.demo.subscription.models.Customer;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static com.indeed.iwf.StateMovement.COMPLETING_WORKFLOW;
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER;
@@ -30,8 +33,8 @@ class SubscriptionOverState implements WorkflowState<Void> {
     }
 
     @Override
-    public Prep prepare(final Void nothing, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
-        final Customer customer = (Customer) queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
+    public Prep prepare(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
+        final Customer customer = queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
         return Prep.prepareAnyConditionCompleted(
                 new ActivityCondition<>("SubscriptionActivities::sendSubscriptionOverEmail", Void.class, new ActivityOptions(30), customer)
         );
@@ -39,7 +42,8 @@ class SubscriptionOverState implements WorkflowState<Void> {
 
     @Override
     public WorkflowStateDecision decide(final Void nothing, final List<ActivityCondition<?>> activityConditions, final List<TimerCondition> timerConditions,
-                                        final List<SignalCondition> signalConditions, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
+                                        final List<SignalCondition> signalConditions,
+                                        final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return new WorkflowStateDecision(
                 Arrays.asList(
                         COMPLETING_WORKFLOW

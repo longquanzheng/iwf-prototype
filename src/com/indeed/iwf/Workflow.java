@@ -30,12 +30,12 @@ public interface Workflow {
     /**
      * register all the search attributes supported by this workflow.
      */
-    List<SearchAttribute<?>> getSearchAttributes();
+    List<SearchAttributeDef<?>> getSearchAttributes();
 
     /**
      * register all the query attributes supported by this workflow.
      */
-    List<QueryAttribute<?>> getQueryAttributes();
+    List<QueryAttributeDef<?>> getQueryAttributes();
 
     /**
      * Because the output type can be changed which causes data cannot be decoded to the new type.

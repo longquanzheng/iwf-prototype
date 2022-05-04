@@ -1,5 +1,9 @@
 package com.indeed.iwf.demo.subscription;
 
+import com.indeed.iwf.QueryAttributesRO;
+import com.indeed.iwf.QueryAttributesRW;
+import com.indeed.iwf.SearchAttributesRO;
+import com.indeed.iwf.SearchAttributesRW;
 import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
@@ -35,14 +39,15 @@ class WelcomeEmailState implements WorkflowState<Customer> {
     }
 
     @Override
-    public Prep prepare(final Customer customer, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
+    public Prep prepare(final Customer customer, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
         return Prep.prepareAnyConditionCompleted(
                 new ActivityCondition<>("SubscriptionActivities::sendWelcomeEmail", Void.class, new ActivityOptions(30), customer)
         );
     }
 
     @Override
-    public WorkflowStateDecision decide(final Customer customer, final List<ActivityCondition<?>> activityConditions, final List<TimerCondition> timerConditions, final List<SignalCondition> signalConditions, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
+    public WorkflowStateDecision decide(final Customer customer, final List<ActivityCondition<?>> activityConditions, final List<TimerCondition> timerConditions, final List<SignalCondition> signalConditions,
+                                        final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         Map<String, Object> attrs = new HashMap<>();
         attrs.put(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER, 0); // starting from 0
         attrs.put(QUERY_ATTRIBUTE_CUSTOMER, customer);

@@ -1,5 +1,9 @@
 package com.indeed.iwf.demo.subscription;
 
+import com.indeed.iwf.QueryAttributesRO;
+import com.indeed.iwf.QueryAttributesRW;
+import com.indeed.iwf.SearchAttributesRO;
+import com.indeed.iwf.SearchAttributesRW;
 import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
@@ -30,7 +34,7 @@ class UpdateChargeAmountState implements WorkflowState<Void> {
     }
 
     @Override
-    public Prep prepare(final Void nothing, final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
+    public Prep prepare(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttribute) {
         return Prep.prepareAnyConditionCompleted(
                 new SignalCondition(SubscriptionWorkflow.SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT)
         );
@@ -39,7 +43,7 @@ class UpdateChargeAmountState implements WorkflowState<Void> {
     @Override
     public WorkflowStateDecision decide(final Void nothing, final List<ActivityCondition<?>> activityConditions,
                                         final List<TimerCondition> timerConditions, final List<SignalCondition> signalConditions,
-                                        final Map<String, Object> searchAttributes, final Map<String, Object> queryAttributes) {
+                                        final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
 
         final Map<String, Object> attrs = new HashMap<>();
         int newAmount = (int) signalConditions.get(0).getSignalValue();
