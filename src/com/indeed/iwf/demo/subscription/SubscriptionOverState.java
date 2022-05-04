@@ -13,7 +13,6 @@ import com.indeed.iwf.condition.SignalCondition;
 import com.indeed.iwf.condition.TimerCondition;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.indeed.iwf.StateMovement.COMPLETING_WORKFLOW;
@@ -45,10 +44,7 @@ class SubscriptionOverState implements WorkflowState<Void> {
                                         final List<SignalCondition> signalConditions,
                                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return new WorkflowStateDecision(
-                Arrays.asList(
-                        COMPLETING_WORKFLOW
-                ), null, null
-
+                COMPLETING_WORKFLOW
         );
     }
 }

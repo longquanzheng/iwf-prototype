@@ -14,7 +14,6 @@ import com.indeed.iwf.condition.SignalCondition;
 import com.indeed.iwf.condition.TimerCondition;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,12 +52,9 @@ class WelcomeEmailState implements WorkflowState<Customer> {
         attrs.put(QUERY_ATTRIBUTE_CUSTOMER, customer);
 
         return new WorkflowStateDecision(
-                Arrays.asList(
-                        new StateMovement(WF_STATE_CANCEL_SUBSCRIPTION, null),
-                        new StateMovement(WF_STATE_UPDATE_CHARGE_AMOUNT, null),
-                        new StateMovement(WF_STATE_WAIT_FOR_NEXT_PERIOD, null)
-                ), null, attrs
-
+                new StateMovement(WF_STATE_CANCEL_SUBSCRIPTION),
+                new StateMovement(WF_STATE_UPDATE_CHARGE_AMOUNT),
+                new StateMovement(WF_STATE_WAIT_FOR_NEXT_PERIOD)
         );
     }
 }

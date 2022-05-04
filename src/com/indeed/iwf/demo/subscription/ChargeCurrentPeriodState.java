@@ -14,7 +14,6 @@ import com.indeed.iwf.condition.SignalCondition;
 import com.indeed.iwf.condition.TimerCondition;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER;
@@ -48,10 +47,7 @@ class ChargeCurrentPeriodState implements WorkflowState<Void> {
                                         final List<SignalCondition> signalConditions,
                                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return new WorkflowStateDecision(
-                Arrays.asList(
-                        new StateMovement(WF_STATE_WAIT_FOR_NEXT_PERIOD, null)
-                ), null, null
-
+                new StateMovement(WF_STATE_WAIT_FOR_NEXT_PERIOD)
         );
     }
 }

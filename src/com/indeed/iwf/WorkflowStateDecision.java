@@ -1,5 +1,6 @@
 package com.indeed.iwf;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -12,14 +13,16 @@ public class WorkflowStateDecision {
     /**
      * when using this constructor, it means the completed conditions are enough so state is completing
      *
-     * @param nextStates             the next states that the workflow will be moved to
-     * @param upsertSearchAttributes the search attributes that will be upsert
-     * @param upsertQueryAttributes  the query attributes that will be upsert
+     * @param nextStates the next states that the workflow will be moved to
      */
-    public WorkflowStateDecision(final List<StateMovement> nextStates, final Map<String, Object> upsertSearchAttributes, final Map<String, Object> upsertQueryAttributes) {
+    public WorkflowStateDecision(final StateMovement... nextStates) {
+        this(Arrays.asList(nextStates));
+    }
+
+    public WorkflowStateDecision(final List<StateMovement> nextStates) {
         this.nextStates = nextStates;
-        this.upsertSearchAttributes = upsertSearchAttributes;
-        this.upsertQueryAttributes = upsertQueryAttributes;
+        this.upsertSearchAttributes = null; // NOTE that this will be calculated based on operation of SearchAttributeRW
+        this.upsertQueryAttributes = null; // NOTE that this will be calculated based on operation of QueryAttributeRW
         needMoreReadyConditions = false;
     }
 

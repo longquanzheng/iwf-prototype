@@ -13,10 +13,7 @@ import com.indeed.iwf.condition.SignalCondition;
 import com.indeed.iwf.condition.TimerCondition;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER;
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.WF_STATE_UPDATE_CHARGE_AMOUNT;
@@ -45,17 +42,13 @@ class UpdateChargeAmountState implements WorkflowState<Void> {
                                         final List<TimerCondition> timerConditions, final List<SignalCondition> signalConditions,
                                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
 
-        final Map<String, Object> attrs = new HashMap<>();
-        int newAmount = (int) signalConditions.get(0).getSignalValue();
-        final Customer customer = (Customer) queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
+        final int newAmount = (int) signalConditions.get(0).getSignalValue();
+        final Customer customer = queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
         customer.getSubscription().setBillingPeriodCharge(newAmount);
-        attrs.put(QUERY_ATTRIBUTE_CUSTOMER, customer);
+        queryAttributes.upsert(QUERY_ATTRIBUTE_CUSTOMER, customer);
 
         return new WorkflowStateDecision(
-
-                Arrays.asList(
-                        new StateMovement(WF_STATE_UPDATE_CHARGE_AMOUNT, null) // go to a loop to update the value
-                ), null, attrs
+                new StateMovement(WF_STATE_UPDATE_CHARGE_AMOUNT) // go to a loop to update the value
         );
     }
 }

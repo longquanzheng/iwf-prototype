@@ -11,7 +11,6 @@ import com.indeed.iwf.condition.Prep;
 import com.indeed.iwf.condition.SignalCondition;
 import com.indeed.iwf.condition.TimerCondition;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.indeed.iwf.StateMovement.COMPLETING_WORKFLOW;
@@ -41,9 +40,7 @@ public class CancelSubscriptionState implements WorkflowState<Void> {
                                         final List<TimerCondition> timerConditions, final List<SignalCondition> signalConditions,
                                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return new WorkflowStateDecision(
-                Arrays.asList(
-                        COMPLETING_WORKFLOW
-                ), null, null
+                COMPLETING_WORKFLOW
         );
     }
 }
