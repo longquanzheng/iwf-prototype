@@ -7,9 +7,9 @@ import com.indeed.iwf.SearchAttributesRW;
 import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
-import com.indeed.iwf.condition.ConditionResults;
-import com.indeed.iwf.condition.Prep;
-import com.indeed.iwf.condition.TimerCondition;
+import com.indeed.iwf.command.CommandRequest;
+import com.indeed.iwf.command.ConditionResults;
+import com.indeed.iwf.command.TimerCommand;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
 import java.util.ArrayList;
@@ -33,11 +33,11 @@ class WaitForPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public Prep prepare(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
+    public CommandRequest execute(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
         final Customer customer = queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
 
-        return Prep.prepareAnyConditionCompleted(
-                new TimerCondition((int) (System.currentTimeMillis() / 1000) + customer.getSubscription().getPeriodsInSubscription())
+        return CommandRequest.forAnyCommandCompleted(
+                new TimerCommand((int) (System.currentTimeMillis() / 1000) + customer.getSubscription().getPeriodsInSubscription())
         );
     }
 

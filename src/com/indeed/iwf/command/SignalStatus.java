@@ -1,4 +1,4 @@
-package com.indeed.iwf.condition;
+package com.indeed.iwf.command;
 
 public enum SignalStatus {
     REQUESTED,

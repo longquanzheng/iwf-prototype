@@ -6,10 +6,10 @@ import com.indeed.iwf.SearchAttributesRO;
 import com.indeed.iwf.SearchAttributesRW;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
-import com.indeed.iwf.condition.ActivityCondition;
-import com.indeed.iwf.condition.ActivityOptions;
-import com.indeed.iwf.condition.ConditionResults;
-import com.indeed.iwf.condition.Prep;
+import com.indeed.iwf.command.ActivityCommand;
+import com.indeed.iwf.command.ActivityOptions;
+import com.indeed.iwf.command.CommandRequest;
+import com.indeed.iwf.command.ConditionResults;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
 import static com.indeed.iwf.StateMovement.COMPLETING_WORKFLOW;
@@ -29,10 +29,10 @@ class SubscriptionOverState implements WorkflowState<Void> {
     }
 
     @Override
-    public Prep prepare(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
+    public CommandRequest execute(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
         final Customer customer = queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
-        return Prep.prepareAnyConditionCompleted(
-                new ActivityCondition<>("SubscriptionActivities::sendSubscriptionOverEmail", Void.class, new ActivityOptions(30), customer)
+        return CommandRequest.forAnyCommandCompleted(
+                new ActivityCommand<>("SubscriptionActivities::sendSubscriptionOverEmail", Void.class, new ActivityOptions(30), customer)
         );
     }
 

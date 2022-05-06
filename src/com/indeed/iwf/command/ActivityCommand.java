@@ -1,6 +1,6 @@
-package com.indeed.iwf.condition;
+package com.indeed.iwf.command;
 
-public final class ActivityCondition<O> extends BaseCondition {
+public final class ActivityCommand<O> extends BaseCommand {
 
     // below are fields supplied by user code via constructor
     private String activityType;
@@ -14,7 +14,7 @@ public final class ActivityCondition<O> extends BaseCondition {
     private ActivityStatus activityStatus;
     private ActivityTimeoutType activityTimeoutType;
 
-    public ActivityCondition(final String activityType, final Class<O> outputType, ActivityOptions options, final Object... input) {
+    public ActivityCommand(final String activityType, final Class<O> outputType, ActivityOptions options, final Object... input) {
         super(options.getActivityConditionId());
         this.activityType = activityType;
         this.input = input;

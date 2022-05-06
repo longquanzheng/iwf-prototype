@@ -7,9 +7,9 @@ import com.indeed.iwf.SearchAttributesRW;
 import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
-import com.indeed.iwf.condition.ConditionResults;
-import com.indeed.iwf.condition.Prep;
-import com.indeed.iwf.condition.SignalCondition;
+import com.indeed.iwf.command.CommandRequest;
+import com.indeed.iwf.command.ConditionResults;
+import com.indeed.iwf.command.SignalCommand;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER;
@@ -28,9 +28,9 @@ class UpdateChargeAmountState implements WorkflowState<Void> {
     }
 
     @Override
-    public Prep prepare(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttribute) {
-        return Prep.prepareAnyConditionCompleted(
-                new SignalCondition(SubscriptionWorkflow.SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT)
+    public CommandRequest execute(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttribute) {
+        return CommandRequest.forAnyCommandCompleted(
+                new SignalCommand(SubscriptionWorkflow.SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT)
         );
     }
 

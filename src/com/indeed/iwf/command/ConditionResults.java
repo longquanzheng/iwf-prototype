@@ -1,4 +1,4 @@
-package com.indeed.iwf.condition;
+package com.indeed.iwf.command;
 
 import java.util.List;
 
@@ -7,15 +7,15 @@ import java.util.List;
  */
 public class ConditionResults {
 
-    public List<ActivityCondition> getAllActivityConditions() {
+    public List<ActivityCommand> getAllActivityConditions() {
         return null;
     }
 
-    public List<SignalCondition> getAllSignalConditions() {
+    public List<SignalCommand> getAllSignalConditions() {
         return null;
     }
 
-    public List<TimerCondition> getAllTimerConditions() {
+    public List<TimerCommand> getAllTimerConditions() {
         return null;
     }
 
@@ -27,11 +27,11 @@ public class ConditionResults {
         return null;
     }
 
-    public ActivityCondition getActivityConditionByIndex(int idx) {
+    public ActivityCommand getActivityConditionByIndex(int idx) {
         return null;
     }
 
-    public ActivityCondition getActivityConditionById(String conditionId) {
+    public ActivityCommand getActivityConditionById(String conditionId) {
         return null;
     }
 

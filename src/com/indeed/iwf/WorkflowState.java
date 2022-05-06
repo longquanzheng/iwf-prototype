@@ -1,7 +1,7 @@
 package com.indeed.iwf;
 
-import com.indeed.iwf.condition.ConditionResults;
-import com.indeed.iwf.condition.Prep;
+import com.indeed.iwf.command.CommandRequest;
+import com.indeed.iwf.command.ConditionResults;
 
 public interface WorkflowState<I> {
     /**
@@ -10,7 +10,7 @@ public interface WorkflowState<I> {
     String getStateId();
 
     /**
-     * this decides whether to load all the search attributes into {@link #decide} and {@link #prepare} method
+     * this decides whether to load all the search attributes into {@link #decide} and {@link #execute} method
      * default to true
      */
     default boolean loadAllSearchAttributes() {
@@ -18,7 +18,7 @@ public interface WorkflowState<I> {
     }
 
     /**
-     * this decides whether to load all the query attributes into {@link #decide} and {@link #prepare} method
+     * this decides whether to load all the query attributes into {@link #decide} and {@link #execute} method
      * default to true
      */
     default boolean loadAllQueryAttributes() {
@@ -38,7 +38,7 @@ public interface WorkflowState<I> {
      * @param searchAttributes
      * @return the requested conditions for this step
      */
-    Prep prepare(I input, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes);
+    CommandRequest execute(I input, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes);
 
     /**
      * Implement this method to decide what to do next when requested conditions are ready

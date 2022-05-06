@@ -6,9 +6,9 @@ import com.indeed.iwf.SearchAttributesRO;
 import com.indeed.iwf.SearchAttributesRW;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
-import com.indeed.iwf.condition.ConditionResults;
-import com.indeed.iwf.condition.Prep;
-import com.indeed.iwf.condition.SignalCondition;
+import com.indeed.iwf.command.CommandRequest;
+import com.indeed.iwf.command.ConditionResults;
+import com.indeed.iwf.command.SignalCommand;
 
 import static com.indeed.iwf.StateMovement.COMPLETING_WORKFLOW;
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.WF_STATE_CANCEL_SUBSCRIPTION;
@@ -26,9 +26,9 @@ public class CancelSubscriptionState implements WorkflowState<Void> {
     }
 
     @Override
-    public Prep prepare(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
-        return Prep.prepareAnyConditionCompleted(
-                new SignalCondition(SubscriptionWorkflow.SIGNAL_METHOD_CANCEL_SUBSCRIPTION)
+    public CommandRequest execute(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
+        return CommandRequest.forAnyCommandCompleted(
+                new SignalCommand(SubscriptionWorkflow.SIGNAL_METHOD_CANCEL_SUBSCRIPTION)
         );
     }
 

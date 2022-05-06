@@ -1,13 +1,13 @@
-package com.indeed.iwf.condition;
+package com.indeed.iwf.command;
 
-public final class SignalCondition extends BaseCondition {
+public final class SignalCommand extends BaseCommand {
 
-    public SignalCondition(final String signalName) {
+    public SignalCommand(final String signalName) {
         super("");
         this.signalName = signalName;
     }
 
-    public SignalCondition(final String conditionId, final String signalName) {
+    public SignalCommand(final String conditionId, final String signalName) {
         super(conditionId);
         this.signalName = signalName;
     }

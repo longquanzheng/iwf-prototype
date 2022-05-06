@@ -7,10 +7,10 @@ import com.indeed.iwf.SearchAttributesRW;
 import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
-import com.indeed.iwf.condition.ActivityCondition;
-import com.indeed.iwf.condition.ActivityOptions;
-import com.indeed.iwf.condition.ConditionResults;
-import com.indeed.iwf.condition.Prep;
+import com.indeed.iwf.command.ActivityCommand;
+import com.indeed.iwf.command.ActivityOptions;
+import com.indeed.iwf.command.CommandRequest;
+import com.indeed.iwf.command.ConditionResults;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER;
@@ -33,9 +33,9 @@ class WelcomeEmailState implements WorkflowState<Customer> {
     }
 
     @Override
-    public Prep prepare(final Customer customer, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
-        return Prep.prepareAnyConditionCompleted(
-                new ActivityCondition<>("SubscriptionActivities::sendWelcomeEmail", Void.class, new ActivityOptions(30), customer)
+    public CommandRequest execute(final Customer customer, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
+        return CommandRequest.forAnyCommandCompleted(
+                new ActivityCommand<>("SubscriptionActivities::sendWelcomeEmail", Void.class, new ActivityOptions(30), customer)
         );
     }
 

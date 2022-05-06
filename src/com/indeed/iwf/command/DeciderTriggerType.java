@@ -1,4 +1,4 @@
-package com.indeed.iwf.condition;
+package com.indeed.iwf.command;
 
 // this trigger type will decide when to invoke decide method based on conditions' statues
 public enum DeciderTriggerType {

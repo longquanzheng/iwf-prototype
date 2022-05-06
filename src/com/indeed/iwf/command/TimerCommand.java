@@ -1,15 +1,15 @@
-package com.indeed.iwf.condition;
+package com.indeed.iwf.command;
 
-public final class TimerCondition extends BaseCondition {
+public final class TimerCommand extends BaseCommand {
 
-    public TimerCondition(int firingUnixTimestampSeconds) {
+    public TimerCommand(int firingUnixTimestampSeconds) {
         super("");
         this.firingUnixTimestampSeconds = firingUnixTimestampSeconds;
 
     }
 
     // note: conditionId is needed when scheduling multiple timers in a state
-    public TimerCondition(String conditionId, int firingUnixTimestampSeconds) {
+    public TimerCommand(String conditionId, int firingUnixTimestampSeconds) {
         super(conditionId);
         this.firingUnixTimestampSeconds = firingUnixTimestampSeconds;
     }

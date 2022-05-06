@@ -1,8 +1,8 @@
-package com.indeed.iwf.condition;
+package com.indeed.iwf.command;
 
-public class BaseCondition {
+public class BaseCommand {
 
-    public BaseCondition(final String conditionId) {
+    public BaseCommand(final String conditionId) {
         this.conditionId = conditionId;
     }
 
