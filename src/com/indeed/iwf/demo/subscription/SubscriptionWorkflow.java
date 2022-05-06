@@ -2,9 +2,9 @@ package com.indeed.iwf.demo.subscription;
 
 import com.indeed.iwf.QueryAttributeDef;
 import com.indeed.iwf.SearchAttributeDef;
-import com.indeed.iwf.SignalMethod;
+import com.indeed.iwf.SignalMethodDef;
+import com.indeed.iwf.StateDef;
 import com.indeed.iwf.Workflow;
-import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
 import java.util.Arrays;
@@ -26,22 +26,22 @@ public class SubscriptionWorkflow implements Workflow {
     public static final String QUERY_ATTRIBUTE_CUSTOMER = "BillingSubscription";
 
     @Override
-    public List<WorkflowState<?>> getStates() {
+    public List<StateDef> getStates() {
         return Arrays.asList(
-                new WelcomeEmailState(),
-                new CancelSubscriptionState(),
-                new WaitForPeriodState(),
-                new ChargeCurrentPeriodState(),
-                new SubscriptionOverState(),
-                new UpdateChargeAmountState()
+                new StateDef(new WelcomeEmailState(), true),
+                new StateDef(new CancelSubscriptionState(), false),
+                new StateDef(new WaitForPeriodState(), false),
+                new StateDef(new ChargeCurrentPeriodState(), false),
+                new StateDef(new SubscriptionOverState(), false),
+                new StateDef(new UpdateChargeAmountState(), false)
         );
     }
 
     @Override
-    public List<SignalMethod<?>> getSignalMethods() {
+    public List<SignalMethodDef<?>> getSignalMethods() {
         return Arrays.asList(
-                new SignalMethod<>(SIGNAL_METHOD_CANCEL_SUBSCRIPTION, Void.class),
-                new SignalMethod<>(SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT, Integer.class)
+                new SignalMethodDef<>(SIGNAL_METHOD_CANCEL_SUBSCRIPTION, Void.class),
+                new SignalMethodDef<>(SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT, Integer.class)
         );
     }
 

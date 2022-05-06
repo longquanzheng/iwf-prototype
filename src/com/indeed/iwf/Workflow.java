@@ -19,20 +19,20 @@ public interface Workflow {
      * A state can execute some commands (activities/signal/timer) and wait for result
      * See more details in the state definition.
      */
-    List<WorkflowState<?>> getStates();
+    List<StateDef> getStates();
 
     /**
-     * register all the signal methods supported by this workflow.
+     * defines all the signal methods supported by this workflow.
      */
-    List<SignalMethod<?>> getSignalMethods();
+    List<SignalMethodDef<?>> getSignalMethods();
 
     /**
-     * register all the search attributes supported by this workflow.
+     * defines all the search attributes supported by this workflow.
      */
     List<SearchAttributeDef<?>> getSearchAttributes();
 
     /**
-     * register all the query attributes supported by this workflow.
+     * defines all the query attributes supported by this workflow.
      */
     List<QueryAttributeDef<?>> getQueryAttributes();
 }
