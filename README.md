@@ -10,7 +10,7 @@ These two factors together have made things extremely difficult for engineers to
 
 ## Proposal
 
-Instead of writing the Cadence workflow, we let users write workflow in code by defining a set of **WorkflowState**. 
+Instead of writing the Cadence workflow, we let users write workflow in code by defining a set of **[WorkflowState](https://github.com/longquanzheng/iwf/blob/main/src/com/iwf/WorkflowState.java)**. 
 Each **WorkflowState** defines two things: **execute** and **decide** 
 
 **execute** will send command for signals, timers, activity, etc 
