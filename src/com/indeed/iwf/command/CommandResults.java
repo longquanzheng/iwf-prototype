@@ -3,19 +3,19 @@ package com.indeed.iwf.command;
 import java.util.List;
 
 /**
- * This is the container of all requested conditions' results/statuses
+ * This is the container of all requested commands' results/statuses
  */
 public class CommandResults {
 
-    public List<ActivityCommand> getAllActivityConditions() {
+    public List<ActivityCommand> getAllActivityCommands() {
         return null;
     }
 
-    public List<SignalCommand> getAllSignalConditions() {
+    public List<SignalCommand> getAllSignalCommands() {
         return null;
     }
 
-    public List<TimerCommand> getAllTimerConditions() {
+    public List<TimerCommand> getAllTimerCommands() {
         return null;
     }
 
@@ -23,15 +23,15 @@ public class CommandResults {
         return null;
     }
 
-    public <T> T getActivityOutputById(String conditionId) {
+    public <T> T getActivityOutputById(String commandId) {
         return null;
     }
 
-    public ActivityCommand getActivityConditionByIndex(int idx) {
+    public ActivityCommand getActivityCommandByIndex(int idx) {
         return null;
     }
 
-    public ActivityCommand getActivityConditionById(String conditionId) {
+    public ActivityCommand getActivityCommandById(String commandId) {
         return null;
     }
 
@@ -39,7 +39,7 @@ public class CommandResults {
         return null;
     }
 
-    public <T> T getSignalValueById(String conditionId) {
+    public <T> T getSignalValueById(String commandId) {
         return null;
     }
 

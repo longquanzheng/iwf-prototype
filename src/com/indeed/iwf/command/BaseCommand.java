@@ -2,14 +2,14 @@ package com.indeed.iwf.command;
 
 public class BaseCommand {
 
-    public BaseCommand(final String conditionId) {
-        this.conditionId = conditionId;
+    public BaseCommand(final String commandId) {
+        this.commandId = commandId;
     }
 
-    private final String conditionId;
+    private final String commandId;
 
-    public String getConditionId() {
-        return conditionId;
+    public String getCommandId() {
+        return commandId;
     }
 }
 

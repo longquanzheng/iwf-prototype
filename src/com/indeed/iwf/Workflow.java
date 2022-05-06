@@ -16,8 +16,7 @@ import java.util.List;
 public interface Workflow {
     /**
      * defines the states of the workflow. A state represents a step of the workflow state machine.
-     * A state can execute some activities and wait for result, set timers to wait for firing, wait for signals.
-     * Upon any of the conditions is met, a callback of the state will be executed to decide what to do next(wait for more conditions, or go to next state).
+     * A state can execute some commands (activities/signal/timer) and wait for result
      * See more details in the state definition.
      */
     List<WorkflowState<?>> getStates();

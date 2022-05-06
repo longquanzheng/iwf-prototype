@@ -15,7 +15,7 @@ public final class ActivityCommand<O> extends BaseCommand {
     private ActivityTimeoutType activityTimeoutType;
 
     public ActivityCommand(final String activityType, final Class<O> outputType, ActivityOptions options, final Object... input) {
-        super(options.getActivityConditionId());
+        super(options.getActivityCommandId());
         this.activityType = activityType;
         this.input = input;
         this.outputType = outputType;

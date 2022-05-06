@@ -8,9 +8,9 @@ public final class TimerCommand extends BaseCommand {
 
     }
 
-    // note: conditionId is needed when scheduling multiple timers in a state
-    public TimerCommand(String conditionId, int firingUnixTimestampSeconds) {
-        super(conditionId);
+    // note: commandId is needed when scheduling multiple timers in a state
+    public TimerCommand(String commandId, int firingUnixTimestampSeconds) {
+        super(commandId);
         this.firingUnixTimestampSeconds = firingUnixTimestampSeconds;
     }
 

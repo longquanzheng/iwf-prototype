@@ -4,16 +4,16 @@ public class ActivityOptions {
 
     // TODO: other optional configs: 1. retryOption, 2. tasklist 3, other detailed timeouts(e.g. startToClose, heartbeat)
 
-    private String activityConditionId; // optional, needed when scheduled multiple activities with same type in a state
+    private String activityCommandId; // optional, needed when scheduled multiple activities with same type in a state
     private int startToCloseTimeoutSeconds;
 
     public ActivityOptions(final int startToCloseTimeoutSeconds) {
-        this.activityConditionId = "";
+        this.activityCommandId = "";
         this.startToCloseTimeoutSeconds = startToCloseTimeoutSeconds;
     }
 
     public ActivityOptions(final String activityId, final int startToCloseTimeoutSeconds) {
-        this.activityConditionId = activityId;
+        this.activityCommandId = activityId;
         this.startToCloseTimeoutSeconds = startToCloseTimeoutSeconds;
     }
 
@@ -25,11 +25,11 @@ public class ActivityOptions {
         this.startToCloseTimeoutSeconds = startToCloseTimeoutSeconds;
     }
 
-    public String getActivityConditionId() {
-        return activityConditionId;
+    public String getActivityCommandId() {
+        return activityCommandId;
     }
 
-    public void setActivityConditionId(final String activityConditionId) {
-        this.activityConditionId = activityConditionId;
+    public void setActivityCommandId(final String activityCommandId) {
+        this.activityCommandId = activityCommandId;
     }
 }

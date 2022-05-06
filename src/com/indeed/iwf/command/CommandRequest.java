@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CommandRequest {
-    private final List<BaseCommand> conditions;
+    private final List<BaseCommand> commands;
     private final DeciderTriggerType deciderTriggerType;
 
-    private CommandRequest(final List<BaseCommand> conditions, final DeciderTriggerType deciderTriggerType) {
-        this.conditions = conditions;
+    private CommandRequest(final List<BaseCommand> commands, final DeciderTriggerType deciderTriggerType) {
+        this.commands = commands;
         this.deciderTriggerType = deciderTriggerType;
     }
 
