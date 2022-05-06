@@ -1,6 +1,5 @@
 package com.indeed.iwf.demo.subscription;
 
-import com.indeed.iwf.DecodingSourceDataExceptionHandler;
 import com.indeed.iwf.QueryAttributeDef;
 import com.indeed.iwf.SearchAttributeDef;
 import com.indeed.iwf.SignalMethod;
@@ -57,11 +56,6 @@ public class SubscriptionWorkflow implements Workflow {
                 new QueryAttributeDef<>(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER, Integer.class),
                 new QueryAttributeDef<>(QUERY_ATTRIBUTE_CUSTOMER, Customer.class)
         );
-    }
-
-    @Override
-    public DecodingSourceDataExceptionHandler getDecodingSourceDataExceptionHandler() {
-        return null;
     }
 }
 

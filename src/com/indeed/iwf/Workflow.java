@@ -36,11 +36,5 @@ public interface Workflow {
      * register all the query attributes supported by this workflow.
      */
     List<QueryAttributeDef<?>> getQueryAttributes();
-
-    /**
-     * Because the output type can be changed which causes data cannot be decoded to the new type.
-     * Implement this handler is to fix this in-compatible change so that the data can still be decoded to the old type.
-     */
-    DecodingSourceDataExceptionHandler getDecodingSourceDataExceptionHandler();
 }
 
