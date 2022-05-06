@@ -1,12 +1,12 @@
 package com.indeed.iwf.demo.subscription;
 
-import com.indeed.iwf.QueryAttributesRO;
-import com.indeed.iwf.QueryAttributesRW;
-import com.indeed.iwf.SearchAttributesRO;
-import com.indeed.iwf.SearchAttributesRW;
+import com.indeed.iwf.StateDecision;
 import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
-import com.indeed.iwf.WorkflowStateDecision;
+import com.indeed.iwf.attributes.QueryAttributesRO;
+import com.indeed.iwf.attributes.QueryAttributesRW;
+import com.indeed.iwf.attributes.SearchAttributesRO;
+import com.indeed.iwf.attributes.SearchAttributesRW;
 import com.indeed.iwf.command.CommandRequest;
 import com.indeed.iwf.command.CommandResults;
 import com.indeed.iwf.command.SignalCommand;
@@ -35,15 +35,15 @@ class UpdateChargeAmountState implements WorkflowState<Void> {
     }
 
     @Override
-    public WorkflowStateDecision decide(final Void nothing, final CommandResults commandResults,
-                                        final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
+    public StateDecision decide(final Void nothing, final CommandResults commandResults,
+                                final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
 
         final int newAmount = commandResults.getSignalValueByIndex(0);
         final Customer customer = queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
         customer.getSubscription().setBillingPeriodCharge(newAmount);
         queryAttributes.upsert(QUERY_ATTRIBUTE_CUSTOMER, customer);
 
-        return new WorkflowStateDecision(
+        return new StateDecision(
                 new StateMovement(WF_STATE_UPDATE_CHARGE_AMOUNT) // go to a loop to update the value
         );
     }

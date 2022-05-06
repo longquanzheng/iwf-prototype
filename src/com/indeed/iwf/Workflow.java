@@ -1,5 +1,8 @@
 package com.indeed.iwf;
 
+import com.indeed.iwf.attributes.QueryAttributeDef;
+import com.indeed.iwf.attributes.SearchAttributeDef;
+
 import java.util.List;
 
 /**

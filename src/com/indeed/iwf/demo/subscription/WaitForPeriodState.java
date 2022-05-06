@@ -1,12 +1,12 @@
 package com.indeed.iwf.demo.subscription;
 
-import com.indeed.iwf.QueryAttributesRO;
-import com.indeed.iwf.QueryAttributesRW;
-import com.indeed.iwf.SearchAttributesRO;
-import com.indeed.iwf.SearchAttributesRW;
+import com.indeed.iwf.StateDecision;
 import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
-import com.indeed.iwf.WorkflowStateDecision;
+import com.indeed.iwf.attributes.QueryAttributesRO;
+import com.indeed.iwf.attributes.QueryAttributesRW;
+import com.indeed.iwf.attributes.SearchAttributesRO;
+import com.indeed.iwf.attributes.SearchAttributesRW;
 import com.indeed.iwf.command.CommandRequest;
 import com.indeed.iwf.command.CommandResults;
 import com.indeed.iwf.command.TimerCommand;
@@ -42,8 +42,8 @@ class WaitForPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public WorkflowStateDecision decide(final Void nothing, final CommandResults commandResults,
-                                        final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
+    public StateDecision decide(final Void nothing, final CommandResults commandResults,
+                                final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         ArrayList<StateMovement> nextStates = new ArrayList();
         final Customer customer = queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
         int currentPeriodNum = queryAttributes.get(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER);
@@ -54,7 +54,7 @@ class WaitForPeriodState implements WorkflowState<Void> {
             nextStates.add(new StateMovement(WF_STATE_SUBSCRIPTION_OVER));
         }
 
-        return new WorkflowStateDecision(
+        return new StateDecision(
                 nextStates
         );
     }

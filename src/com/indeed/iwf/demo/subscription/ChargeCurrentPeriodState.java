@@ -1,12 +1,12 @@
 package com.indeed.iwf.demo.subscription;
 
-import com.indeed.iwf.QueryAttributesRO;
-import com.indeed.iwf.QueryAttributesRW;
-import com.indeed.iwf.SearchAttributesRO;
-import com.indeed.iwf.SearchAttributesRW;
+import com.indeed.iwf.StateDecision;
 import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
-import com.indeed.iwf.WorkflowStateDecision;
+import com.indeed.iwf.attributes.QueryAttributesRO;
+import com.indeed.iwf.attributes.QueryAttributesRW;
+import com.indeed.iwf.attributes.SearchAttributesRO;
+import com.indeed.iwf.attributes.SearchAttributesRW;
 import com.indeed.iwf.command.ActivityCommand;
 import com.indeed.iwf.command.ActivityOptions;
 import com.indeed.iwf.command.CommandRequest;
@@ -40,9 +40,9 @@ class ChargeCurrentPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public WorkflowStateDecision decide(final Void nothing, final CommandResults commandResults,
-                                        final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
-        return new WorkflowStateDecision(
+    public StateDecision decide(final Void nothing, final CommandResults commandResults,
+                                final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
+        return new StateDecision(
                 new StateMovement(WF_STATE_WAIT_FOR_NEXT_PERIOD)
         );
     }

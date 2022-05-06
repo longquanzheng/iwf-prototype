@@ -1,5 +1,9 @@
 package com.indeed.iwf;
 
+import com.indeed.iwf.attributes.QueryAttributesRO;
+import com.indeed.iwf.attributes.QueryAttributesRW;
+import com.indeed.iwf.attributes.SearchAttributesRO;
+import com.indeed.iwf.attributes.SearchAttributesRW;
 import com.indeed.iwf.command.CommandRequest;
 import com.indeed.iwf.command.CommandResults;
 
@@ -51,8 +55,8 @@ public interface WorkflowState<I> {
      * @param searchAttributes the search attributes that can be used as Read+Write
      * @return the decision of what to do next(e.g. transition to next states)
      */
-    WorkflowStateDecision decide(final I input, final CommandResults commandResults,
-                                 final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
+    StateDecision decide(final I input, final CommandResults commandResults,
+                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
 }
 
 

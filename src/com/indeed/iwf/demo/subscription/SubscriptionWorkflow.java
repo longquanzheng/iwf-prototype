@@ -1,10 +1,10 @@
 package com.indeed.iwf.demo.subscription;
 
-import com.indeed.iwf.QueryAttributeDef;
-import com.indeed.iwf.SearchAttributeDef;
 import com.indeed.iwf.SignalMethodDef;
 import com.indeed.iwf.StateDef;
 import com.indeed.iwf.Workflow;
+import com.indeed.iwf.attributes.QueryAttributeDef;
+import com.indeed.iwf.attributes.SearchAttributeDef;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
 import java.util.Arrays;

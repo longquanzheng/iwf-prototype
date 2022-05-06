@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class WorkflowStateDecision {
+public class StateDecision {
     private final boolean needMoreReadyCommands;
     private final List<StateMovement> nextStates;
     private final Map<String, Object> upsertSearchAttributes;
@@ -15,11 +15,11 @@ public class WorkflowStateDecision {
      *
      * @param nextStates the next states that the workflow will be moved to
      */
-    public WorkflowStateDecision(final StateMovement... nextStates) {
+    public StateDecision(final StateMovement... nextStates) {
         this(Arrays.asList(nextStates));
     }
 
-    public WorkflowStateDecision(final List<StateMovement> nextStates) {
+    public StateDecision(final List<StateMovement> nextStates) {
         this.nextStates = nextStates;
         this.upsertSearchAttributes = null; // NOTE that this will be calculated based on operation of SearchAttributeRW
         this.upsertQueryAttributes = null; // NOTE that this will be calculated based on operation of QueryAttributeRW
@@ -31,11 +31,11 @@ public class WorkflowStateDecision {
      *
      * @return
      */
-    public static WorkflowStateDecision WaitForMoreCommands() {
-        return new WorkflowStateDecision(true);
+    public static StateDecision WaitForMoreCommands() {
+        return new StateDecision(true);
     }
 
-    private WorkflowStateDecision(boolean needMoreReadyCommands) {
+    private StateDecision(boolean needMoreReadyCommands) {
         this.needMoreReadyCommands = true;
         nextStates = null;
         upsertSearchAttributes = null;

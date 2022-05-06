@@ -1,4 +1,4 @@
-package com.indeed.iwf;
+package com.indeed.iwf.attributes;
 
 public final class QueryAttributeDef<T> {
     private String key;
