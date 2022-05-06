@@ -1,0 +1,47 @@
+package com.iwf.demo.subscription;
+
+import com.iwf.StateDecision;
+import com.iwf.StateMovement;
+import com.iwf.WorkflowState;
+import com.iwf.attributes.QueryAttributesRO;
+import com.iwf.attributes.QueryAttributesRW;
+import com.iwf.attributes.SearchAttributesRO;
+import com.iwf.attributes.SearchAttributesRW;
+import com.iwf.command.CommandRequest;
+import com.iwf.command.CommandResults;
+import com.iwf.command.SignalCommand;
+import com.iwf.demo.subscription.models.Customer;
+
+class UpdateChargeAmountState implements WorkflowState<Void> {
+
+    @Override
+    public String getStateId() {
+        return SubscriptionWorkflow.WF_STATE_UPDATE_CHARGE_AMOUNT;
+    }
+
+    @Override
+    public Class<Void> getInputType() {
+        return Void.class;
+    }
+
+    @Override
+    public CommandRequest execute(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttribute) {
+        return CommandRequest.forAnyCommandCompleted(
+                new SignalCommand(SubscriptionWorkflow.SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT)
+        );
+    }
+
+    @Override
+    public StateDecision decide(final Void nothing, final CommandResults commandResults,
+                                final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
+
+        final int newAmount = commandResults.getSignalValueByIndex(0);
+        final Customer customer = queryAttributes.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER);
+        customer.getSubscription().setBillingPeriodCharge(newAmount);
+        queryAttributes.upsert(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER, customer);
+
+        return new StateDecision(
+                new StateMovement(SubscriptionWorkflow.WF_STATE_UPDATE_CHARGE_AMOUNT) // go to a loop to update the value
+        );
+    }
+}
