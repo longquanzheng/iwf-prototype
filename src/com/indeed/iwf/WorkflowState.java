@@ -37,7 +37,8 @@ public interface WorkflowState<I> {
      * @param queryAttributes  the query attributes that can be used as readOnly
      * @param searchAttributes the search attributes that can be used as readOnly
      * @return the requested commands for this step
-     * NOTE: it's readonly here for simplifying the implementation(execute can be reverted in some edge cases)
+     * NOTE: it's readonly here for simplifying the implementation(execute can be reverted in some edge cases),
+     *       We could change to support R+W if necessary.  
      */
     CommandRequest execute(I input, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes);
 
