@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class StateDecision {
-    private final boolean needMoreReadyCommands;
+    private final boolean needMoreCommandResults;
     private final List<StateMovement> nextStates;
     private final Map<String, Object> upsertSearchAttributes;
     private final Map<String, Object> upsertQueryAttributes;
@@ -23,7 +23,7 @@ public class StateDecision {
         this.nextStates = nextStates;
         this.upsertSearchAttributes = null; // NOTE that this will be calculated based on operation of SearchAttributeRW
         this.upsertQueryAttributes = null; // NOTE that this will be calculated based on operation of QueryAttributeRW
-        needMoreReadyCommands = false;
+        needMoreCommandResults = false;
     }
 
     /**
@@ -31,12 +31,12 @@ public class StateDecision {
      *
      * @return
      */
-    public static StateDecision WaitForMoreCommands() {
+    public static StateDecision WaitForMoreCommandResults() {
         return new StateDecision(true);
     }
 
-    private StateDecision(boolean needMoreReadyCommands) {
-        this.needMoreReadyCommands = true;
+    private StateDecision(boolean needMoreCommandResults) {
+        this.needMoreCommandResults = true;
         nextStates = null;
         upsertSearchAttributes = null;
         upsertQueryAttributes = null;
@@ -55,6 +55,6 @@ public class StateDecision {
     }
 
     public boolean needMoreReadyCommands() {
-        return needMoreReadyCommands;
+        return needMoreCommandResults;
     }
 }
