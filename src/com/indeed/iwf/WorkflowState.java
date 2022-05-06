@@ -1,5 +1,6 @@
 package com.indeed.iwf;
 
+import com.indeed.iwf.attributes.AttributeLoadingPolicy;
 import com.indeed.iwf.attributes.QueryAttributesRO;
 import com.indeed.iwf.attributes.QueryAttributesRW;
 import com.indeed.iwf.attributes.SearchAttributesRO;
@@ -17,16 +18,16 @@ public interface WorkflowState<I> {
      * this decides whether to load all the search attributes into {@link #decide} and {@link #execute} method
      * default to true
      */
-    default boolean loadAllSearchAttributes() {
-        return true;
+    default AttributeLoadingPolicy loadAllSearchAttributes() {
+        return AttributeLoadingPolicy.getLoadAllWithoutLocking();
     }
 
     /**
      * this decides whether to load all the query attributes into {@link #decide} and {@link #execute} method
      * default to true
      */
-    default boolean loadAllQueryAttributes() {
-        return true;
+    default AttributeLoadingPolicy loadAllQueryAttributes() {
+        return AttributeLoadingPolicy.getLoadAllWithoutLocking();
     }
 
     /**
