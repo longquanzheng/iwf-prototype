@@ -18,7 +18,7 @@ public interface WorkflowState<I> {
      * this decides whether to load all the search attributes into {@link #decide} and {@link #execute} method
      * default to true
      */
-    default AttributeLoadingPolicy loadAllSearchAttributes() {
+    default AttributeLoadingPolicy getSearchAttributesLoadingPolicy() {
         return AttributeLoadingPolicy.getLoadAllWithoutLocking();
     }
 
@@ -26,7 +26,7 @@ public interface WorkflowState<I> {
      * this decides whether to load all the query attributes into {@link #decide} and {@link #execute} method
      * default to true
      */
-    default AttributeLoadingPolicy loadAllQueryAttributes() {
+    default AttributeLoadingPolicy getQueryAttributesLoadingPolicy() {
         return AttributeLoadingPolicy.getLoadAllWithoutLocking();
     }
 
