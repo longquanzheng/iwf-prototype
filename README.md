@@ -11,13 +11,13 @@ These two factors together have made things extremely difficult for engineers to
 ## Proposal
 
 Instead of writing the Cadence workflow, we let users write workflow in code by defining a set of **WorkflowState**. 
-Each **WorkflowState** defines two things: **prepare** and **decide** 
+Each **WorkflowState** defines two things: **execute** and **decide** 
 
-**prepare** will request for signals, timers, activity, etc 
-When all/any precondition is met, the **decide** is invoked to get the next states to jump into. 
+**execute** will request for signals, timers, activity, etc 
+When requested commands are finished, the **decide** is invoked to get the next states to jump into. 
 
 As implementation, one Cadence workflow to execute the **WorkflowState**. 
-This workflow will call **prepare** and **decide**  using Cadence activities, so that those user workflow code can always be replayed safe. 
+This workflow will call **execute** and **decide**  using Cadence activities, so that those user workflow code can always be replayed safe. 
 
 
 It preserves all most the full power of Cadence like 
@@ -49,7 +49,7 @@ And there is no need to worry about non-deterministic errors.
   * No need to write any replay code anymore to protect the determinism
 * It will be super easy to learn and understand. Everything is straightfoward and no trciky things at all
   * There is no restriction anymore for writing your workflow code. You can call RPC in workflow without using activity if you like. 
-* It will be super easy to debug when things go wrong. The workflow history will preseve the input/output of each call of **prepare** and **decide** 
+* It will be super easy to debug when things go wrong. The workflow history will preseve the input/output of each call of **execute** and **decide** 
 * It will be super easy to monitor and operate. 
   * The monitoring is simplifed. There is no need to monitoring decision task timeout/failure etc.
   * There is no decision task concept anymore. The runtime environment is simplifed to request-response manner so debugging is extremely straightfoward. 
