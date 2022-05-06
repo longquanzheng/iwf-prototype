@@ -29,7 +29,7 @@ class ChargeCurrentPeriodState implements WorkflowState<Void> {
     public CommandRequest execute(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttribute) {
         final Customer customer = searchAttributes.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER);
         final int currentPeriod = queryAttribute.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER);
-        return CommandRequest.forAnyCommandCompleted(
+        return CommandRequest.forAllCommandCompleted(
                 new ActivityCommand<>("SubscriptionActivities::chargeCustomerForBillingPeriod", Void.class, new ActivityOptions(30), customer, currentPeriod)
         );
     }

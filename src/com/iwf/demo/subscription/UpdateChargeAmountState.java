@@ -26,7 +26,7 @@ class UpdateChargeAmountState implements WorkflowState<Void> {
 
     @Override
     public CommandRequest execute(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttribute) {
-        return CommandRequest.forAnyCommandCompleted(
+        return CommandRequest.forAllCommandCompleted(
                 new SignalCommand(SubscriptionWorkflow.SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT)
         );
     }

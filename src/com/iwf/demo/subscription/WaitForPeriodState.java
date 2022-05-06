@@ -30,7 +30,7 @@ class WaitForPeriodState implements WorkflowState<Void> {
     public CommandRequest execute(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
         final Customer customer = queryAttributes.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER);
 
-        return CommandRequest.forAnyCommandCompleted(
+        return CommandRequest.forAllCommandCompleted(
                 new TimerCommand((int) (System.currentTimeMillis() / 1000) + customer.getSubscription().getPeriodsInSubscription())
         );
     }

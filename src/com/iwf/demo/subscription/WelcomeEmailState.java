@@ -27,7 +27,7 @@ class WelcomeEmailState implements WorkflowState<Customer> {
 
     @Override
     public CommandRequest execute(final Customer customer, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
-        return CommandRequest.forAnyCommandCompleted(
+        return CommandRequest.forAllCommandCompleted(
                 new ActivityCommand<>("SubscriptionActivities::sendWelcomeEmail", Void.class, new ActivityOptions(30), customer)
         );
     }
