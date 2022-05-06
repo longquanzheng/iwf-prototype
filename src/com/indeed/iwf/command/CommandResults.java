@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * This is the container of all requested conditions' results/statuses
  */
-public class ConditionResults {
+public class CommandResults {
 
     public List<ActivityCommand> getAllActivityConditions() {
         return null;

@@ -1,7 +1,7 @@
 package com.indeed.iwf;
 
 import com.indeed.iwf.command.CommandRequest;
-import com.indeed.iwf.command.ConditionResults;
+import com.indeed.iwf.command.CommandResults;
 
 public interface WorkflowState<I> {
     /**
@@ -43,7 +43,7 @@ public interface WorkflowState<I> {
     /**
      * Implement this method to decide what to do next when requested conditions are ready
      */
-    WorkflowStateDecision decide(final I input, final ConditionResults conditionResults,
+    WorkflowStateDecision decide(final I input, final CommandResults commandResults,
                                  final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
 }
 

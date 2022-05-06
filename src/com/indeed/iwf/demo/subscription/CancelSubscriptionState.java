@@ -7,7 +7,7 @@ import com.indeed.iwf.SearchAttributesRW;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
 import com.indeed.iwf.command.CommandRequest;
-import com.indeed.iwf.command.ConditionResults;
+import com.indeed.iwf.command.CommandResults;
 import com.indeed.iwf.command.SignalCommand;
 
 import static com.indeed.iwf.StateMovement.COMPLETING_WORKFLOW;
@@ -33,7 +33,7 @@ public class CancelSubscriptionState implements WorkflowState<Void> {
     }
 
     @Override
-    public WorkflowStateDecision decide(final Void nothing, final ConditionResults conditionResults,
+    public WorkflowStateDecision decide(final Void nothing, final CommandResults commandResults,
                                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return new WorkflowStateDecision(
                 COMPLETING_WORKFLOW

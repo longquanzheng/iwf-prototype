@@ -8,7 +8,7 @@ import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
 import com.indeed.iwf.command.CommandRequest;
-import com.indeed.iwf.command.ConditionResults;
+import com.indeed.iwf.command.CommandResults;
 import com.indeed.iwf.command.TimerCommand;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
@@ -42,7 +42,7 @@ class WaitForPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public WorkflowStateDecision decide(final Void nothing, final ConditionResults conditionResults,
+    public WorkflowStateDecision decide(final Void nothing, final CommandResults commandResults,
                                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         ArrayList<StateMovement> nextStates = new ArrayList();
         final Customer customer = queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);

@@ -8,7 +8,7 @@ import com.indeed.iwf.StateMovement;
 import com.indeed.iwf.WorkflowState;
 import com.indeed.iwf.WorkflowStateDecision;
 import com.indeed.iwf.command.CommandRequest;
-import com.indeed.iwf.command.ConditionResults;
+import com.indeed.iwf.command.CommandResults;
 import com.indeed.iwf.command.SignalCommand;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
@@ -35,10 +35,10 @@ class UpdateChargeAmountState implements WorkflowState<Void> {
     }
 
     @Override
-    public WorkflowStateDecision decide(final Void nothing, final ConditionResults conditionResults,
+    public WorkflowStateDecision decide(final Void nothing, final CommandResults commandResults,
                                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
 
-        final int newAmount = conditionResults.getSignalValueByIndex(0);
+        final int newAmount = commandResults.getSignalValueByIndex(0);
         final Customer customer = queryAttributes.get(QUERY_ATTRIBUTE_CUSTOMER);
         customer.getSubscription().setBillingPeriodCharge(newAmount);
         queryAttributes.upsert(QUERY_ATTRIBUTE_CUSTOMER, customer);

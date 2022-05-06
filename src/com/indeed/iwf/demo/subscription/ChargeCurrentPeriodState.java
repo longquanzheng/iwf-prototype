@@ -10,7 +10,7 @@ import com.indeed.iwf.WorkflowStateDecision;
 import com.indeed.iwf.command.ActivityCommand;
 import com.indeed.iwf.command.ActivityOptions;
 import com.indeed.iwf.command.CommandRequest;
-import com.indeed.iwf.command.ConditionResults;
+import com.indeed.iwf.command.CommandResults;
 import com.indeed.iwf.demo.subscription.models.Customer;
 
 import static com.indeed.iwf.demo.subscription.SubscriptionWorkflow.QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER;
@@ -40,7 +40,7 @@ class ChargeCurrentPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public WorkflowStateDecision decide(final Void nothing, final ConditionResults conditionResults,
+    public WorkflowStateDecision decide(final Void nothing, final CommandResults commandResults,
                                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return new WorkflowStateDecision(
                 new StateMovement(WF_STATE_WAIT_FOR_NEXT_PERIOD)
