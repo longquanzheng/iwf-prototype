@@ -13,10 +13,11 @@ import com.iwf.command.SignalCommand;
 import static com.iwf.StateMovement.COMPLETING_WORKFLOW;
 
 public class CancelSubscriptionState implements WorkflowState<Void> {
+    public static final String WF_STATE_CANCEL_SUBSCRIPTION = "cancelSubscription";
 
     @Override
     public String getStateId() {
-        return SubscriptionWorkflow.WF_STATE_CANCEL_SUBSCRIPTION;
+        return WF_STATE_CANCEL_SUBSCRIPTION;
     }
 
     @Override

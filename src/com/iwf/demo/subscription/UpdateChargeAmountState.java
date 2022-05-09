@@ -14,9 +14,11 @@ import com.iwf.demo.subscription.models.Customer;
 
 class UpdateChargeAmountState implements WorkflowState<Void> {
 
+    public static final String WF_STATE_UPDATE_CHARGE_AMOUNT = "updateChargeAmount";
+
     @Override
     public String getStateId() {
-        return SubscriptionWorkflow.WF_STATE_UPDATE_CHARGE_AMOUNT;
+        return WF_STATE_UPDATE_CHARGE_AMOUNT;
     }
 
     @Override
@@ -41,7 +43,7 @@ class UpdateChargeAmountState implements WorkflowState<Void> {
         queryAttributes.upsert(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER, customer);
 
         return new StateDecision(
-                new StateMovement(SubscriptionWorkflow.WF_STATE_UPDATE_CHARGE_AMOUNT) // go to a loop to update the value
+                new StateMovement(WF_STATE_UPDATE_CHARGE_AMOUNT) // go to a loop to update the value
         );
     }
 }

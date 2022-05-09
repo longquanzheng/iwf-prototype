@@ -13,11 +13,15 @@ import com.iwf.command.CommandRequest;
 import com.iwf.command.CommandResults;
 import com.iwf.demo.subscription.models.Customer;
 
+import static com.iwf.demo.subscription.WaitForPeriodState.WF_STATE_WAIT_FOR_NEXT_PERIOD;
+
 class ChargeCurrentPeriodState implements WorkflowState<Void> {
+
+    public static final String WF_STATE_CHARGE_CURRENT_PERIOD = "chargeCurrentPeriod";
 
     @Override
     public String getStateId() {
-        return SubscriptionWorkflow.WF_STATE_CHARGE_CURRENT_PERIOD;
+        return WF_STATE_CHARGE_CURRENT_PERIOD;
     }
 
     @Override
@@ -38,7 +42,7 @@ class ChargeCurrentPeriodState implements WorkflowState<Void> {
     public StateDecision decide(final Void nothing, final CommandResults commandResults,
                                 final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return new StateDecision(
-                new StateMovement(SubscriptionWorkflow.WF_STATE_WAIT_FOR_NEXT_PERIOD)
+                new StateMovement(WF_STATE_WAIT_FOR_NEXT_PERIOD)
         );
     }
 }

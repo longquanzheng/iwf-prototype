@@ -13,11 +13,17 @@ import com.iwf.command.CommandRequest;
 import com.iwf.command.CommandResults;
 import com.iwf.demo.subscription.models.Customer;
 
+import static com.iwf.demo.subscription.CancelSubscriptionState.WF_STATE_CANCEL_SUBSCRIPTION;
+import static com.iwf.demo.subscription.UpdateChargeAmountState.WF_STATE_UPDATE_CHARGE_AMOUNT;
+import static com.iwf.demo.subscription.WaitForPeriodState.WF_STATE_WAIT_FOR_NEXT_PERIOD;
+
 class WelcomeEmailState implements WorkflowState<Customer> {
+
+    public static final String WF_STATE_SEND_WELCOME_EMAIL = "sendWelcomeEmail";
 
     @Override
     public String getStateId() {
-        return SubscriptionWorkflow.WF_STATE_SEND_WELCOME_EMAIL;
+        return WF_STATE_SEND_WELCOME_EMAIL;
     }
 
     @Override
@@ -39,9 +45,9 @@ class WelcomeEmailState implements WorkflowState<Customer> {
         queryAttributes.upsert(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER, customer);
 
         return new StateDecision(
-                new StateMovement(SubscriptionWorkflow.WF_STATE_CANCEL_SUBSCRIPTION),
-                new StateMovement(SubscriptionWorkflow.WF_STATE_UPDATE_CHARGE_AMOUNT),
-                new StateMovement(SubscriptionWorkflow.WF_STATE_WAIT_FOR_NEXT_PERIOD)
+                new StateMovement(WF_STATE_CANCEL_SUBSCRIPTION),
+                new StateMovement(WF_STATE_UPDATE_CHARGE_AMOUNT),
+                new StateMovement(WF_STATE_WAIT_FOR_NEXT_PERIOD)
         );
     }
 }

@@ -16,9 +16,11 @@ import static com.iwf.StateMovement.COMPLETING_WORKFLOW;
 
 class SubscriptionOverState implements WorkflowState<Void> {
 
+    public static final String WF_STATE_SUBSCRIPTION_OVER = "subscriptionOver";
+
     @Override
     public String getStateId() {
-        return SubscriptionWorkflow.WF_STATE_SUBSCRIPTION_OVER;
+        return WF_STATE_SUBSCRIPTION_OVER;
     }
 
     @Override

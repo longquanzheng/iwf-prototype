@@ -14,11 +14,17 @@ import com.iwf.demo.subscription.models.Customer;
 
 import java.util.ArrayList;
 
+import static com.iwf.demo.subscription.ChargeCurrentPeriodState.WF_STATE_CHARGE_CURRENT_PERIOD;
+import static com.iwf.demo.subscription.SubscriptionOverState.WF_STATE_SUBSCRIPTION_OVER;
+import static com.iwf.demo.subscription.WelcomeEmailState.WF_STATE_SEND_WELCOME_EMAIL;
+
 class WaitForPeriodState implements WorkflowState<Void> {
+
+    public static final String WF_STATE_WAIT_FOR_NEXT_PERIOD = "waitForNextPeriod";
 
     @Override
     public String getStateId() {
-        return SubscriptionWorkflow.WF_STATE_SEND_WELCOME_EMAIL;
+        return WF_STATE_SEND_WELCOME_EMAIL;
     }
 
     @Override
@@ -43,9 +49,9 @@ class WaitForPeriodState implements WorkflowState<Void> {
         int currentPeriodNum = queryAttributes.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER);
         if (currentPeriodNum < customer.getSubscription().getPeriodsInSubscription()) {
             queryAttributes.upsert(SubscriptionWorkflow.QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER, +1); // starting from 0
-            nextStates.add(new StateMovement(SubscriptionWorkflow.WF_STATE_CHARGE_CURRENT_PERIOD));
+            nextStates.add(new StateMovement(WF_STATE_CHARGE_CURRENT_PERIOD));
         } else {
-            nextStates.add(new StateMovement(SubscriptionWorkflow.WF_STATE_SUBSCRIPTION_OVER));
+            nextStates.add(new StateMovement(WF_STATE_SUBSCRIPTION_OVER));
         }
 
         return new StateDecision(

@@ -12,12 +12,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class SubscriptionWorkflow implements Workflow {
-    public static final String WF_STATE_SEND_WELCOME_EMAIL = "sendWelcomeEmail";
-    public static final String WF_STATE_CANCEL_SUBSCRIPTION = "cancelSubscription";
-    public static final String WF_STATE_WAIT_FOR_NEXT_PERIOD = "waitForNextPeriod";
-    public static final String WF_STATE_CHARGE_CURRENT_PERIOD = "chargeCurrentPeriod";
-    public static final String WF_STATE_SUBSCRIPTION_OVER = "subscriptionOver";
-    public static final String WF_STATE_UPDATE_CHARGE_AMOUNT = "updateChargeAmount";
 
     public static final String SIGNAL_METHOD_CANCEL_SUBSCRIPTION = "CancelSubscription";
     public static final String SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT = "UpdateBillingPeriodChargeAmount";
