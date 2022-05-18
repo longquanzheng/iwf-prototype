@@ -46,10 +46,23 @@ type builtInStateMovement struct {
 	id string
 }
 
-var COMPLETING_WORKFLOW = &builtInStateMovement{
-	id: "_SYS_COMPLETING_WORKFLOW",
+func (m *builtInStateMovement) GetNextStateId() string {
+	return m.id
 }
 
-var FAILING_WORKFLOW = &builtInStateMovement{
-	id: "_SYS_FAILING_WORKFLOW",
+func (m *builtInStateMovement) GetNextStateInput() interface{} {
+	return nil
+}
+
+func CompletingWorkflow() StateMovement {
+	return &builtInStateMovement{
+		id: "_SYS_COMPLETING_WORKFLOW",
+	}
+}
+
+func FailingWorkflow() StateMovement {
+	return &builtInStateMovement{
+		id: "_SYS_FAILING_WORKFLOW",
+	}
+
 }
