@@ -30,13 +30,3 @@ type SignalMethodDef interface {
 	getName() string
 	getValueType() interface{}
 }
-
-type SearchAttributeDef interface {
-	getKey() string
-	getValueType() interface{}
-}
-
-type QueryAttributeDef interface {
-	getName() string
-	getValueType() interface{}
-}

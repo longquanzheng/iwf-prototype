@@ -16,7 +16,7 @@ type WorkflowState interface {
 	 * NOTE: it's readonly here for simplifying the implementation(execute can be reverted in some edge cases),
 	 *       We could change to support R+W if necessary.
 	 */
-	execute(input interface{}, searchAttributes SearchAttributesRO, queryAttributes QueryAttributesRO) CommandRequest
+	execute(ctx WorkflowContext, input interface{}, searchAttributes SearchAttributesRO, queryAttributes QueryAttributesRO) CommandRequest
 
 	/**
 	 * Implement this method to decide what to do next when requested commands are ready
@@ -27,12 +27,29 @@ type WorkflowState interface {
 	 * @param searchAttributes the search attributes that can be used as Read+Write
 	 * @return the decision of what to do next(e.g. transition to next states)
 	 */
-	decide(input interface{}, commandResults CommandResults, searchAttributes SearchAttributesRW, queryAttributes QueryAttributesRW) StateDecision
+	decide(ctx WorkflowContext, input interface{}, commandResults CommandResults, searchAttributes SearchAttributesRW, queryAttributes QueryAttributesRW) StateDecision
 }
 
-type AttributeLoadingPolicy struct {
+type StateDecision interface {
+	WaitForMoreCommandResults() bool
+	GetNextStates() []StateMovement
+	GetUpsertSearchAttributes()
+	GetUpsertQueryAttributes()
 }
 
-type StateDecision struct {
+type StateMovement interface {
+	GetNextStateId() string
+	GetNextStateInput() interface{}
+}
 
+type builtInStateMovement struct {
+	id string
+}
+
+var COMPLETING_WORKFLOW = &builtInStateMovement{
+	id: "_SYS_COMPLETING_WORKFLOW",
+}
+
+var FAILING_WORKFLOW = &builtInStateMovement{
+	id: "_SYS_FAILING_WORKFLOW",
 }

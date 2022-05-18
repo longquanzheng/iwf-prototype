@@ -20,7 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fda251e-a781-4b06-b63a-e36784666541" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/thriftCompiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attribute.go" beforeDir="false" afterPath="$PROJECT_DIR$/attribute.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/command.go" beforeDir="false" afterPath="$PROJECT_DIR$/command.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/state.go" beforeDir="false" afterPath="$PROJECT_DIR$/state.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workflow.go" beforeDir="false" afterPath="$PROJECT_DIR$/workflow.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/com/iwf/StateDecision.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/com/iwf/StateDecision.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

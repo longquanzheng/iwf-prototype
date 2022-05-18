@@ -1,9 +1,7 @@
 package gosdk
 
-type CommandRequest struct {
-
+type CommandRequest interface {
 }
 
-type CommandResults struct {
-
+type CommandResults interface {
 }
