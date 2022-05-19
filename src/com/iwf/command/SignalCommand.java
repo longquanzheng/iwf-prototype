@@ -7,23 +7,15 @@ public final class SignalCommand extends BaseCommand {
         this.signalName = signalName;
     }
 
-    public SignalCommand(final String conditionId, final String signalName) {
-        super(conditionId);
+    public SignalCommand(final String commandId, final String signalName) {
+        super(commandId);
         this.signalName = signalName;
     }
 
     private final String signalName;
-    private Object signalValue;
 
     public String getSignalName() {
         return signalName;
     }
 
-    void setSignalValue(Object sig) {
-        this.signalValue = sig;
-    }
-
-    public Object getSignalValue() {
-        return this.signalValue;
-    }
 }

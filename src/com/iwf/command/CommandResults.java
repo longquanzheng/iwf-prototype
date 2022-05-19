@@ -7,15 +7,15 @@ import java.util.List;
  */
 public class CommandResults {
 
-    public List<ActivityCommand> getAllActivityCommands() {
+    public List<ActivityCommandResult> getAllActivityCommandResults() {
         return null;
     }
 
-    public List<SignalCommand> getAllSignalCommands() {
+    public List<SignalCommandResult> getAllSignalCommandResults() {
         return null;
     }
 
-    public List<TimerCommand> getAllTimerCommands() {
+    public List<TimerCommandResult> getAllTimerCommandResults() {
         return null;
     }
 
@@ -27,11 +27,11 @@ public class CommandResults {
         return null;
     }
 
-    public ActivityCommand getActivityCommandByIndex(int idx) {
+    public ActivityCommandResult getActivityCommandResultByIndex(int idx) {
         return null;
     }
 
-    public ActivityCommand getActivityCommandById(String commandId) {
+    public ActivityCommandResult getActivityCommandResultById(String commandId) {
         return null;
     }
 

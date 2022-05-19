@@ -2,12 +2,12 @@ package com.iwf.command;
 
 public final class ActivityCommandResult {
 
-    private String activityType;
-    private String activityCommandId;
+    private final String activityType;
+    private final String activityCommandId;
 
-    private Object output;
-    private ActivityStatus activityStatus;
-    private ActivityTimeoutType activityTimeoutType;
+    private final Object output;
+    private final ActivityStatus activityStatus;
+    private final ActivityTimeoutType activityTimeoutType;
 
     public ActivityCommandResult(final String activityType, final String activityCommandId, final Object output, final ActivityStatus activityStatus, final ActivityTimeoutType activityTimeoutType) {
         this.activityType = activityType;
