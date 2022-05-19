@@ -7,6 +7,12 @@ type Workflow interface {
 	 * See more details in the state definition.
 	 */
 	GetStates() []StateDef
+
+	/**
+	 * defines all the signal methods supported by this workflow.
+	 */
+	GetActivityTypes() []ActivityTypeDef
+
 	/**
 	 * defines all the signal methods supported by this workflow.
 	 */
@@ -19,14 +25,4 @@ type Workflow interface {
 	 * defines all the query attributes supported by this workflow.
 	 */
 	GetQueryAttributes() []QueryAttributeDef
-}
-
-type StateDef interface {
-	getState() WorkflowState
-	isStartable() bool
-}
-
-type SignalMethodDef interface {
-	getName() string
-	getValueType() interface{}
 }

@@ -1,25 +1,41 @@
 package gosdk
 
 type SearchAttributeDef interface {
-	getKey() string
-	getValueType() interface{}
+	GetKey() string
+	/**
+	 * return a struct pointer of the input type
+	 * this is needed for deserializing data into the input object for execute/decide API before invoking them
+	 * TODO: think of a better way to do it in Golang, maybe using generic?
+	 */
+	GetValueType() interface{}
 }
 
 type QueryAttributeDef interface {
-	getName() string
-	getValueType() interface{}
+	GetName() string
+	/**
+	 * return a struct pointer of the input type
+	 * this is needed for deserializing data into the input object for execute/decide API before invoking them
+	 * TODO: think of a better way to do it in Golang, maybe using generic?
+	 */
+	GetValueType() interface{}
 }
 
 type SearchAttributesRO interface {
+	Get(key string) interface{}
 }
 
 type SearchAttributesRW interface {
+	SearchAttributesRO
+	Upsert(key string, value interface{})
 }
 
 type QueryAttributesRO interface {
+	Get(key string) interface{}
 }
 
 type QueryAttributesRW interface {
+	QueryAttributesRO
+	Upsert(key string, value interface{})
 }
 
 type AttributeLoadingType string

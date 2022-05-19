@@ -1,7 +1,17 @@
 package gosdk
 
+type StateDef interface {
+	getState() WorkflowState
+	isStartable() bool
+}
+
 type WorkflowState interface {
 	GetStateId() string
+	/**
+	 * return a struct pointer of the input type
+	 * this is needed for deserializing data into the input object for execute/decide API before invoking them
+	 * TODO: think of a better way to do it in Golang, maybe using generic?
+	 */
 	GetInputType() interface{}
 	GetSearchAttributesLoadingPolicy() AttributeLoadingPolicy
 	GetQueryAttributesLoadingPolicy() AttributeLoadingPolicy
