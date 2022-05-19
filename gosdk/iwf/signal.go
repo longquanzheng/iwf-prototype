@@ -1,4 +1,4 @@
-package gosdk
+package iwf
 
 type SignalMethodDef interface {
 	GetName() string

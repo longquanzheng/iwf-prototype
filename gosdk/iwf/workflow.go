@@ -1,4 +1,4 @@
-package gosdk
+package iwf
 
 type Workflow interface {
 	/**

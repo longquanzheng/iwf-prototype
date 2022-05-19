@@ -1,4 +1,4 @@
-package gosdk
+package iwf
 
 import "github.com/golang/protobuf/ptypes/duration"
 
