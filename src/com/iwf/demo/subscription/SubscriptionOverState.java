@@ -12,7 +12,6 @@ import com.iwf.command.CommandRequest;
 import com.iwf.command.CommandResults;
 import com.iwf.demo.subscription.models.Customer;
 
-import static com.iwf.StateMovement.COMPLETING_WORKFLOW;
 import static com.iwf.demo.subscription.SubscriptionWorkflow.SEND_SUBSCRIPTION_OVER_EMAIL_ACTIVITY;
 
 class SubscriptionOverState implements WorkflowState<Void> {
@@ -40,8 +39,6 @@ class SubscriptionOverState implements WorkflowState<Void> {
     @Override
     public StateDecision decide(final Void nothing, final CommandResults commandResults,
                                 final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
-        return new StateDecision(
-                COMPLETING_WORKFLOW
-        );
+        return StateDecision.COMPLETING_WORKFLOW;
     }
 }

@@ -10,7 +10,7 @@ import com.iwf.command.CommandRequest;
 import com.iwf.command.CommandResults;
 import com.iwf.command.SignalCommand;
 
-import static com.iwf.StateMovement.COMPLETING_WORKFLOW;
+import static com.iwf.StateDecision.COMPLETING_WORKFLOW;
 
 public class CancelSubscriptionState implements WorkflowState<Void> {
     public static final String WF_STATE_CANCEL_SUBSCRIPTION = "cancelSubscription";
@@ -35,8 +35,6 @@ public class CancelSubscriptionState implements WorkflowState<Void> {
     @Override
     public StateDecision decide(final Void nothing, final CommandResults commandResults,
                                 final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
-        return new StateDecision(
-                COMPLETING_WORKFLOW
-        );
+        return COMPLETING_WORKFLOW;
     }
 }

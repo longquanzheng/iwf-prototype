@@ -4,7 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static com.iwf.StateMovement.COMPLETING_WORKFLOW_MOVEMENT;
+import static com.iwf.StateMovement.FAILING_WORKFLOW_MOVEMENT;
+
 public class StateDecision {
+
+    public static StateDecision COMPLETING_WORKFLOW = new StateDecision(COMPLETING_WORKFLOW_MOVEMENT);
+    public static StateDecision FAILING_WORKFLOW = new StateDecision(FAILING_WORKFLOW_MOVEMENT);
+
     private final boolean waitForMoreCommandResults;
     private final List<StateMovement> nextStates;
     private final Map<String, Object> upsertSearchAttributes;
