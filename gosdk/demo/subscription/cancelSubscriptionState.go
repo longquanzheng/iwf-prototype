@@ -23,7 +23,7 @@ func (w CancelSubscriptionState) GetQueryAttributesLoadingPolicy() iwf.Attribute
 }
 
 func (w CancelSubscriptionState) Execute(ctx iwf.WorkflowContext, input interface{}, searchAttributes iwf.SearchAttributesRO, queryAttributes iwf.QueryAttributesRO) (iwf.CommandRequest, error) {
-	return iwf.WaitForAllCommandsCompleted(
+	return iwf.RequestAllCommandsCompleted(
 		iwf.NewSignalCommand(SIGNAL_METHOD_CANCEL_SUBSCRIPTION),
 	),nil
 }

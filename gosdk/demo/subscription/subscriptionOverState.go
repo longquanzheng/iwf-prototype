@@ -1,33 +1,45 @@
 package subscription
 
-import "github.com/longquanzheng/iwf/gosdk/iwf"
+import (
+	"fmt"
+
+	"github.com/longquanzheng/iwf/gosdk/iwf"
+)
 
 type SubscriptioinOverState struct {
 
 }
 
+const WF_STATE_SUBSCRIPTION_OVER = "subscriptionOver"
+
 func (w SubscriptioinOverState) GetStateId() string {
-	panic("implement me")
+	return WF_STATE_SUBSCRIPTION_OVER
 }
 
 func (w SubscriptioinOverState) GetInputType() iwf.NewTypePtr {
-	panic("implement me")
+	return nil
 }
 
 func (w SubscriptioinOverState) GetSearchAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
-	panic("implement me")
+	return nil
 }
 
 func (w SubscriptioinOverState) GetQueryAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
-	panic("implement me")
+	return nil
 }
 
 func (w SubscriptioinOverState) Execute(ctx iwf.WorkflowContext, input interface{}, searchAttributes iwf.SearchAttributesRO, queryAttributes iwf.QueryAttributesRO) (iwf.CommandRequest, error) {
-	panic("implement me")
+	customer, ok := input.(*Customer)
+	if !ok{
+		return nil, fmt.Errorf("cannot get Customer from input")
+	}
+	return iwf.RequestAllCommandsCompleted(
+		iwf.NewActivityCommand(SEND_SUBSCRIPTION_OVER_EMAIL_ACTIVITY, customer),
+	), nil
 }
 
 func (w SubscriptioinOverState) Decide(ctx iwf.WorkflowContext, input interface{}, commandResults iwf.CommandResults, searchAttributes iwf.SearchAttributesRW, queryAttributes iwf.QueryAttributesRW) (iwf.StateDecision, error) {
-	panic("implement me")
+	return iwf.CompletingWorkflow(), nil
 }
 
 var _ iwf.WorkflowState = (*SubscriptioinOverState)(nil)

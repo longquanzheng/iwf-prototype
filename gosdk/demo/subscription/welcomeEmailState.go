@@ -26,7 +26,7 @@ func (w WelcomeEmailState) GetQueryAttributesLoadingPolicy() iwf.AttributeLoadin
 }
 
 func (w WelcomeEmailState) Execute(ctx iwf.WorkflowContext, customer interface{}, searchAttributes iwf.SearchAttributesRO, queryAttributes iwf.QueryAttributesRO) (iwf.CommandRequest, error) {
-	return iwf.WaitForAllCommandsCompleted(
+	return iwf.RequestAllCommandsCompleted(
 		iwf.NewActivityCommand(SEND_WELCOME_EMAIL_ACTIVITY, customer),
 	),nil
 }

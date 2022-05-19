@@ -5,15 +5,15 @@ type CommandRequest interface {
 	GetDeciderTriggerType() DeciderTriggerType
 }
 
-func WaitForAllCommandsCompleted(command ...BaseCommand)CommandRequest{
+func RequestAllCommandsCompleted(command ...BaseCommand)CommandRequest{
 	return nil
 }
 
-func WaitForAnyCommandsCompleted(command ...BaseCommand)CommandRequest{
+func RequestAnyCommandsCompleted(command ...BaseCommand)CommandRequest{
 	return nil
 }
 
-func WaitForAnyCommandsClosed(command ...BaseCommand)CommandRequest{
+func RequestAnyCommandsClosed(command ...BaseCommand)CommandRequest{
 	return nil
 }
 
