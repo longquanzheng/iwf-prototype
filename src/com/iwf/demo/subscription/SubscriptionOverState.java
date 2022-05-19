@@ -13,6 +13,7 @@ import com.iwf.command.CommandResults;
 import com.iwf.demo.subscription.models.Customer;
 
 import static com.iwf.StateMovement.COMPLETING_WORKFLOW;
+import static com.iwf.demo.subscription.SubscriptionWorkflow.SEND_SUBSCRIPTION_OVER_EMAIL_ACTIVITY;
 
 class SubscriptionOverState implements WorkflowState<Void> {
 
@@ -32,7 +33,7 @@ class SubscriptionOverState implements WorkflowState<Void> {
     public CommandRequest execute(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
         final Customer customer = queryAttributes.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER);
         return CommandRequest.forAllCommandCompleted(
-                new ActivityCommand<>("SubscriptionActivities::sendSubscriptionOverEmail", Void.class, new ActivityOptions(30), customer)
+                new ActivityCommand(SEND_SUBSCRIPTION_OVER_EMAIL_ACTIVITY, new ActivityOptions(30), customer)
         );
     }
 

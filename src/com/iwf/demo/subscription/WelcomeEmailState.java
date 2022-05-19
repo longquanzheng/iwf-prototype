@@ -14,6 +14,7 @@ import com.iwf.command.CommandResults;
 import com.iwf.demo.subscription.models.Customer;
 
 import static com.iwf.demo.subscription.CancelSubscriptionState.WF_STATE_CANCEL_SUBSCRIPTION;
+import static com.iwf.demo.subscription.SubscriptionWorkflow.SEND_WELCOME_EMAIL_ACTIVITY;
 import static com.iwf.demo.subscription.UpdateChargeAmountState.WF_STATE_UPDATE_CHARGE_AMOUNT;
 import static com.iwf.demo.subscription.WaitForPeriodState.WF_STATE_WAIT_FOR_NEXT_PERIOD;
 
@@ -34,7 +35,7 @@ class WelcomeEmailState implements WorkflowState<Customer> {
     @Override
     public CommandRequest execute(final Customer customer, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
         return CommandRequest.forAllCommandCompleted(
-                new ActivityCommand<>("SubscriptionActivities::sendWelcomeEmail", Void.class, new ActivityOptions(30), customer)
+                new ActivityCommand(SEND_WELCOME_EMAIL_ACTIVITY, new ActivityOptions(30), customer)
         );
     }
 
