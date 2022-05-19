@@ -1,19 +1,16 @@
 package iwf
 
 type StateDef interface {
-	getState() WorkflowState
-	isStartable() bool
+	GetState() WorkflowState
+	IsStartable() bool
 }
 
 type WorkflowState interface {
 	GetStateId() string
-	/**
-	 * return a struct pointer of the input type
-	 * this is needed for deserializing data into the input object for execute/decide API before invoking them
-	 * TODO: think of a better way to do it in Golang, maybe using generic?
-	 */
-	GetInputType() interface{}
+	GetInputType() NewTypePtr
+	// optional, can just return nil to use the default policy
 	GetSearchAttributesLoadingPolicy() AttributeLoadingPolicy
+	// optional, can just return nil to use the default policy
 	GetQueryAttributesLoadingPolicy() AttributeLoadingPolicy
 
 	/**
@@ -26,7 +23,7 @@ type WorkflowState interface {
 	 * NOTE: it's readonly here for simplifying the implementation(execute can be reverted in some edge cases),
 	 *       We could change to support R+W if necessary.
 	 */
-	execute(ctx WorkflowContext, input interface{}, searchAttributes SearchAttributesRO, queryAttributes QueryAttributesRO) CommandRequest
+	Execute(ctx WorkflowContext, input interface{}, searchAttributes SearchAttributesRO, queryAttributes QueryAttributesRO) (CommandRequest, error)
 
 	/**
 	 * Implement this method to decide what to do next when requested commands are ready
@@ -37,7 +34,7 @@ type WorkflowState interface {
 	 * @param searchAttributes the search attributes that can be used as Read+Write
 	 * @return the decision of what to do next(e.g. transition to next states)
 	 */
-	decide(ctx WorkflowContext, input interface{}, commandResults CommandResults, searchAttributes SearchAttributesRW, queryAttributes QueryAttributesRW) StateDecision
+	Decide(ctx WorkflowContext, input interface{}, commandResults CommandResults, searchAttributes SearchAttributesRW, queryAttributes QueryAttributesRW) (StateDecision, error)
 }
 
 type StateDecision interface {
@@ -47,9 +44,25 @@ type StateDecision interface {
 	GetUpsertQueryAttributes()
 }
 
+func NewStateDecision(movement ...StateMovement)StateDecision{
+	return nil
+}
+
+func WaitForMoreCommandResults()StateDecision{
+	return nil
+}
+
 type StateMovement interface {
 	GetNextStateId() string
 	GetNextStateInput() interface{}
+}
+
+func NewStateMovement(nextStateId string) StateMovement{
+	return nil
+}
+
+func NewStateMovementWithInput(nextStateId string, nextStateInput interface{}) StateMovement{
+	return nil
 }
 
 type builtInStateMovement struct {
@@ -64,15 +77,51 @@ func (m *builtInStateMovement) GetNextStateInput() interface{} {
 	return nil
 }
 
-func CompletingWorkflow() StateMovement {
+func completingWorkflowMovement() StateMovement {
 	return &builtInStateMovement{
 		id: "_SYS_COMPLETING_WORKFLOW",
 	}
 }
 
-func FailingWorkflow() StateMovement {
+func failingWorkflowMovement() StateMovement {
 	return &builtInStateMovement{
 		id: "_SYS_FAILING_WORKFLOW",
 	}
 
+}
+
+type builtInStateDecision struct {
+	movement StateMovement
+}
+
+func (b builtInStateDecision) WaitForMoreCommandResults() bool {
+	return false
+}
+
+func (b builtInStateDecision) GetNextStates() []StateMovement {
+	return nil
+}
+
+func (b builtInStateDecision) GetUpsertSearchAttributes() {
+	return
+}
+
+func (b builtInStateDecision) GetUpsertQueryAttributes() {
+	return
+}
+
+func CompletingWorkflow() StateDecision {
+	return &builtInStateDecision{
+		movement: completingWorkflowMovement(),
+	}
+}
+
+func FailingWorkflow() StateDecision {
+	return &builtInStateDecision{
+		movement: failingWorkflowMovement(),
+	}
+}
+
+func NewStateDef(state WorkflowState, startable bool) StateDef{
+	return nil
 }

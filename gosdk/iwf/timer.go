@@ -7,6 +7,10 @@ type TimerCommand interface {
 	GetFiringTime() time.Time
 }
 
+func NewTimerCommand(firingTime time.Time) TimerCommand{
+	return nil
+}
+
 type TimerStatus string
 
 const (

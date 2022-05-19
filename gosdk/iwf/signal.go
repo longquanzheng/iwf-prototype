@@ -2,12 +2,20 @@ package iwf
 
 type SignalMethodDef interface {
 	GetName() string
-	GetValueType() interface{}
+	GetValueType() NewTypePtr
+}
+
+func NewSignalMethodDef(signalName string, valueType NewTypePtr) SignalMethodDef{
+	return nil
 }
 
 type SignalCommand interface {
 	BaseCommand
 	GetName() string
+}
+
+func NewSignalCommand(name string) SignalCommand{
+	return nil
 }
 
 type SignalStatus string

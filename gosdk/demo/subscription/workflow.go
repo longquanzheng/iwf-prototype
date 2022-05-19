@@ -16,23 +16,48 @@ type SubscriptionWorkflow struct {
 }
 
 func (s SubscriptionWorkflow) GetStates() []iwf.StateDef {
-	panic("implement me")
+	return []iwf.StateDef{
+		iwf.NewStateDef( &WelcomeEmailState{}, true),
+		iwf.NewStateDef( &CancelSubscriptionState{}, false),
+		iwf.NewStateDef( &WaitForPeriodState{}, false),
+		iwf.NewStateDef( &ChargeCurrentPeriodState{}, false),
+		iwf.NewStateDef( &SubscriptioinOverState{}, false),
+		iwf.NewStateDef( &UpdateChargeAmountState{}, false),
+	}
 }
 
 func (s SubscriptionWorkflow) GetActivityTypes() []iwf.ActivityTypeDef {
-	panic("implement me")
+	return []iwf.ActivityTypeDef{
+		iwf.NewActivityDef(SEND_WELCOME_EMAIL_ACTIVITY, nil),
+		iwf.NewActivityDef(SEND_SUBSCRIPTION_OVER_EMAIL_ACTIVITY, nil),
+		iwf.NewActivityDef(CHARGE_CUSTOMER_ACTIVITY, nil),
+	}
 }
 
 func (s SubscriptionWorkflow) GetSignalMethods() []iwf.SignalMethodDef {
-	panic("implement me")
+	return []iwf.SignalMethodDef{
+		iwf.NewSignalMethodDef(SIGNAL_METHOD_CANCEL_SUBSCRIPTION, nil),
+		iwf.NewSignalMethodDef(SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT, func() interface{} {
+			var i int
+			return &i
+		}),
+	}
 }
 
 func (s SubscriptionWorkflow) GetSearchAttributes() []iwf.SearchAttributeDef {
-	panic("implement me")
+	return nil
 }
 
 func (s SubscriptionWorkflow) GetQueryAttributes() []iwf.QueryAttributeDef {
-	panic("implement me")
+	return []iwf.QueryAttributeDef{
+		iwf.NewQueryAttributeDef(QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER, func() interface{} {
+			var i int
+			return &i
+		}),
+		iwf.NewQueryAttributeDef(QUERY_ATTRIBUTE_CUSTOMER, func() interface{} {
+			return &Customer{}
+		}),
+	}
 }
 
 var _ iwf.Workflow = (*SubscriptionWorkflow)(nil)

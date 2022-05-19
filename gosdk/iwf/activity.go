@@ -4,12 +4,11 @@ import "github.com/golang/protobuf/ptypes/duration"
 
 type ActivityTypeDef interface {
 	GetActivityType() string
-	/**
-	 * return a struct pointer of the input type
-	 * this is needed for deserializing data into the input object for execute/decide API before invoking them
-	 * TODO: think of a better way to do it in Golang, maybe using generic?
-	 */
-	GetActivityOutputType() interface{}
+	GetActivityOutputType() NewTypePtr
+}
+
+func NewActivityDef(activityType string, outputType NewTypePtr) ActivityTypeDef{
+	return nil
 }
 
 type ActivityOptions interface {
@@ -32,6 +31,10 @@ type ActivityCommand interface {
 	GetActivityType() string
 	GetActivityInput() interface{}
 	GetActivityOptions() ActivityOptions
+}
+
+func NewActivityCommand(activityType string, input ...interface{}) ActivityCommand{
+	return nil
 }
 
 type ActivityTimeoutType string

@@ -5,6 +5,18 @@ type CommandRequest interface {
 	GetDeciderTriggerType() DeciderTriggerType
 }
 
+func WaitForAllCommandsCompleted(command ...BaseCommand)CommandRequest{
+	return nil
+}
+
+func WaitForAnyCommandsCompleted(command ...BaseCommand)CommandRequest{
+	return nil
+}
+
+func WaitForAnyCommandsClosed(command ...BaseCommand)CommandRequest{
+	return nil
+}
+
 type CommandResults interface {
 	GetAllActivityCommandResults() []ActivityCommandResult
 	GetAllSignalCommandResults() []SignalCommandResult
@@ -26,7 +38,7 @@ type BaseCommand interface {
 type DeciderTriggerType string
 
 const (
-	ALL_CONDITION_COMPLETED DeciderTriggerType = "ALL_CONDITION_COMPLETED" // this will wait for all commands are completed. It will fail the workflow if any command fails(e.g. activity failure)
-	ANY_CONDITION_COMPLETED DeciderTriggerType = "ANY_CONDITION_COMPLETED" // this will wait for any command to be completed. It will fail the workflow if any command fails(e.g. activity failure)
-	ANY_CONDITION_CLOSED    DeciderTriggerType = "ANY_CONDITION_CLOSED"    // this will wait for any command to be closed. It won't fail the workflow if any command fails(e.g. activity failure)
+	ALL_COMMAND_COMPLETED DeciderTriggerType = "ALL_COMMAND_COMPLETED" // this will wait for all commands are completed. It will fail the workflow if any command fails(e.g. activity failure)
+	ANY_COMMAND_COMPLETED DeciderTriggerType = "ANY_COMMAND_COMPLETED" // this will wait for any command to be completed. It will fail the workflow if any command fails(e.g. activity failure)
+	ANY_COMMAND_CLOSED    DeciderTriggerType = "ANY_COMMAND_CLOSED"    // this will wait for any command to be closed. It won't fail the workflow if any command fails(e.g. activity failure)
 )

@@ -2,22 +2,20 @@ package iwf
 
 type SearchAttributeDef interface {
 	GetKey() string
-	/**
-	 * return a struct pointer of the input type
-	 * this is needed for deserializing data into the input object for execute/decide API before invoking them
-	 * TODO: think of a better way to do it in Golang, maybe using generic?
-	 */
-	GetValueType() interface{}
+	GetValueType() NewTypePtr
+}
+
+func NewSearchAttributeDef(key string, valueType NewTypePtr) SearchAttributeDef{
+	return nil
 }
 
 type QueryAttributeDef interface {
 	GetName() string
-	/**
-	 * return a struct pointer of the input type
-	 * this is needed for deserializing data into the input object for execute/decide API before invoking them
-	 * TODO: think of a better way to do it in Golang, maybe using generic?
-	 */
-	GetValueType() interface{}
+	GetValueType() NewTypePtr
+}
+
+func NewQueryAttributeDef(name string, valueType NewTypePtr) QueryAttributeDef{
+	return nil
 }
 
 type SearchAttributesRO interface {
@@ -58,3 +56,4 @@ type AttributeLoadingPolicy interface {
 	GetAttributeLoadingType() AttributeLoadingType
 	GetAttributeKeys() []string
 }
+
