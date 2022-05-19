@@ -1,10 +1,10 @@
 package com.iwf.demo.subscription;
 
-import com.iwf.SignalMethodDef;
 import com.iwf.StateDef;
 import com.iwf.Workflow;
 import com.iwf.attributes.QueryAttributeDef;
 import com.iwf.attributes.SearchAttributeDef;
+import com.iwf.command.SignalMethodDef;
 import com.iwf.demo.subscription.models.Customer;
 
 import java.util.Arrays;

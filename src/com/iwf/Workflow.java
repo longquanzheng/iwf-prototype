@@ -2,6 +2,8 @@ package com.iwf;
 
 import com.iwf.attributes.QueryAttributeDef;
 import com.iwf.attributes.SearchAttributeDef;
+import com.iwf.command.ActivityDef;
+import com.iwf.command.SignalMethodDef;
 
 import java.util.List;
 
@@ -23,6 +25,11 @@ public interface Workflow {
      * See more details in the state definition.
      */
     List<StateDef> getStates();
+
+    /**
+     * defines all the activity types supported by this workflow.
+     */
+    List<ActivityDef<?>> getActivityTypes();
 
     /**
      * defines all the signal methods supported by this workflow.

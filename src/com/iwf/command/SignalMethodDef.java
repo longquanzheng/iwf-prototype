@@ -1,4 +1,4 @@
-package com.iwf;
+package com.iwf.command;
 
 public final class SignalMethodDef<T> {
     private String signalName;
