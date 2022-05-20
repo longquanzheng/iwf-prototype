@@ -5,6 +5,7 @@ import com.iwf.attributes.QueryAttributesRO;
 import com.iwf.attributes.QueryAttributesRW;
 import com.iwf.attributes.SearchAttributesRO;
 import com.iwf.attributes.SearchAttributesRW;
+import com.iwf.command.CommandCarryOverPolicy;
 import com.iwf.command.CommandRequest;
 import com.iwf.command.CommandResults;
 
@@ -15,19 +16,13 @@ public interface WorkflowState<I> {
     String getStateId();
 
     /**
-     * this decides whether to load all the search attributes into {@link #decide} and {@link #execute} method
-     * default to true
+     * Optional configuration to adjust the state behaviors
+     * Default options should work well for most cases
      */
-    default AttributeLoadingPolicy getSearchAttributesLoadingPolicy() {
-        return AttributeLoadingPolicy.getLoadAllWithoutLocking();
-    }
-
-    /**
-     * this decides whether to load all the query attributes into {@link #decide} and {@link #execute} method
-     * default to true
-     */
-    default AttributeLoadingPolicy getQueryAttributesLoadingPolicy() {
-        return AttributeLoadingPolicy.getLoadAllWithoutLocking();
+    default StateOptions getStateOptions() {
+        return new StateOptions(AttributeLoadingPolicy.getLoadAllWithoutLocking(),
+                AttributeLoadingPolicy.getLoadAllWithoutLocking(),
+                CommandCarryOverPolicy.none());
     }
 
     /**

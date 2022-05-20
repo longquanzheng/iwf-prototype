@@ -21,14 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="279c89e8-cec4-4c72-94f6-463bf0444b71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/subscription/cancelSubscriptionState.go" beforeDir="false" afterPath="$PROJECT_DIR$/demo/subscription/cancelSubscriptionState.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/subscription/chargeCurrentPeriodState.go" beforeDir="false" afterPath="$PROJECT_DIR$/demo/subscription/chargeCurrentPeriodState.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/subscription/subscriptionOverState.go" beforeDir="false" afterPath="$PROJECT_DIR$/demo/subscription/subscriptionOverState.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/subscription/updateChargeAmountState.go" beforeDir="false" afterPath="$PROJECT_DIR$/demo/subscription/updateChargeAmountState.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/subscription/waitForPeriodState.go" beforeDir="false" afterPath="$PROJECT_DIR$/demo/subscription/waitForPeriodState.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/subscription/welcomeEmailState.go" beforeDir="false" afterPath="$PROJECT_DIR$/demo/subscription/welcomeEmailState.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iwf/command.go" beforeDir="false" afterPath="$PROJECT_DIR$/iwf/command.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/com/iwf/demo/subscription/WaitForPeriodState.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/com/iwf/demo/subscription/WaitForPeriodState.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
