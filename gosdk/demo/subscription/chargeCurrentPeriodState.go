@@ -20,11 +20,7 @@ func (w ChargeCurrentPeriodState) GetInputType() iwf.NewTypePtr {
 	return nil
 }
 
-func (w ChargeCurrentPeriodState) GetSearchAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
-	return nil
-}
-
-func (w ChargeCurrentPeriodState) GetQueryAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
+func (w ChargeCurrentPeriodState) GetStateOptions() iwf.StateOptions {
 	return nil
 }
 

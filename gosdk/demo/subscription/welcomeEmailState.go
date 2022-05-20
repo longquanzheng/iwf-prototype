@@ -17,11 +17,7 @@ func (w WelcomeEmailState) GetInputType() iwf.NewTypePtr {
 	}
 }
 
-func (w WelcomeEmailState) GetSearchAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
-	return nil
-}
-
-func (w WelcomeEmailState) GetQueryAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
+func (w WelcomeEmailState) GetStateOptions() iwf.StateOptions {
 	return nil
 }
 

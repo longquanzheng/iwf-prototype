@@ -8,10 +8,11 @@ type StateDef interface {
 type WorkflowState interface {
 	GetStateId() string
 	GetInputType() NewTypePtr
-	// optional, can just return nil to use the default policy
-	GetSearchAttributesLoadingPolicy() AttributeLoadingPolicy
-	// optional, can just return nil to use the default policy
-	GetQueryAttributesLoadingPolicy() AttributeLoadingPolicy
+	/**
+	 * Optional configuration to adjust the state behaviors
+	 * Default options should work well for most cases
+	 */
+	GetStateOptions() StateOptions
 
 	/**
 	 * Implement this method to execute the commands set up for this state.
@@ -35,6 +36,19 @@ type WorkflowState interface {
 	 * @return the decision of what to do next(e.g. transition to next states)
 	 */
 	Decide(ctx WorkflowContext, input interface{}, commandResults CommandResults, searchAttributes SearchAttributesRW, queryAttributes QueryAttributesRW) (StateDecision, error)
+}
+
+type StateOptions interface {
+	// optional, can just return nil to use the default policy
+	GetSearchAttributesLoadingPolicy() AttributeLoadingPolicy
+	// optional, can just return nil to use the default policy
+	GetQueryAttributesLoadingPolicy() AttributeLoadingPolicy
+	/**
+	 * when using RequestAnyCommandsCompleted or RequestAnyCommandsClosed
+	 * there could be some unfinished commands left to this state. This policy decided whether and how to carry over those unfinished command to
+	 * future states. Default to NONE which means no carry over.
+	 */
+	GetCommandCarryOverPolicy() CommandCarryOverPolicy
 }
 
 type StateDecision interface {

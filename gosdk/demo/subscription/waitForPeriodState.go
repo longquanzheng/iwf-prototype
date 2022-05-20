@@ -20,11 +20,7 @@ func (w WaitForPeriodState) GetInputType() iwf.NewTypePtr {
 	return nil
 }
 
-func (w WaitForPeriodState) GetSearchAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
-	return nil
-}
-
-func (w WaitForPeriodState) GetQueryAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
+func (w WaitForPeriodState) GetStateOptions() iwf.StateOptions {
 	return nil
 }
 

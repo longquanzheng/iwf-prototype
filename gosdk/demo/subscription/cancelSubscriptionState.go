@@ -14,11 +14,7 @@ func (w CancelSubscriptionState) GetInputType() iwf.NewTypePtr {
 	return nil
 }
 
-func (w CancelSubscriptionState) GetSearchAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
-	return nil
-}
-
-func (w CancelSubscriptionState) GetQueryAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
+func (w CancelSubscriptionState) GetStateOptions() iwf.StateOptions {
 	return nil
 }
 

@@ -20,11 +20,7 @@ func (w SubscriptioinOverState) GetInputType() iwf.NewTypePtr {
 	return nil
 }
 
-func (w SubscriptioinOverState) GetSearchAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
-	return nil
-}
-
-func (w SubscriptioinOverState) GetQueryAttributesLoadingPolicy() iwf.AttributeLoadingPolicy {
+func (w SubscriptioinOverState) GetStateOptions() iwf.StateOptions {
 	return nil
 }
 
