@@ -28,7 +28,7 @@ public class StateOptions {
     }
 
     /**
-     * this decides whether to load all the query attributes into {@link WorkflowState#decide} and {@link WorkflowState#execute} method
+     * this decides whether to load all the query attributes into {@link WorkflowState#decide} and {@link WorkflowState#start} method
      * default to true
      */
     public AttributeLoadingPolicy getQueryAttributesLoadingPolicy() {
@@ -36,7 +36,7 @@ public class StateOptions {
     }
 
     /**
-     * this decides whether to load all the search attributes into {@link WorkflowState#decide} and {@link WorkflowState#execute} method
+     * this decides whether to load all the search attributes into {@link WorkflowState#decide} and {@link WorkflowState#start} method
      * default to true
      */
     public AttributeLoadingPolicy getSearchAttributesLoadingPolicy() {

@@ -40,13 +40,13 @@ public interface WorkflowState<I> {
      * NOTE: it's readonly here for simplifying the implementation(execute can be reverted in some edge cases),
      *       We could change to support R+W if necessary.
      */
-    CommandRequest execute(I input, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes);
+    CommandRequest start(I input, final SearchAttributesRW searchAttributes, final SearchAttributesRW queryAttributes);
 
     /**
      * Implement this method to decide what to do next when requested commands are ready
      *
      * @param input            the state input which is deserialized by dataConverter with {@link #getInputType}
-     * @param commandResults   the results of the command that executed by {@link #execute}
+     * @param commandResults   the results of the command that executed by {@link #start}
      * @param queryAttributes  the query attributes that can be used as Read+Write
      * @param searchAttributes the search attributes that can be used as Read+Write
      * @return the decision of what to do next(e.g. transition to next states)

@@ -29,7 +29,7 @@ class SubscriptionOverState implements WorkflowState<Void> {
     }
 
     @Override
-    public CommandRequest execute(final Void nothing, final SearchAttributesRO searchAttributes, final QueryAttributesRO queryAttributes) {
+    public CommandRequest start(final Void nothing, final SearchAttributesRW searchAttributes, final SearchAttributesRW queryAttributes) {
         final Customer customer = queryAttributes.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER);
         return CommandRequest.forAllCommandCompleted(
                 new ActivityCommand(SEND_SUBSCRIPTION_OVER_EMAIL_ACTIVITY, new ActivityOptions(30), customer)
