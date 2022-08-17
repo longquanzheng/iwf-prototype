@@ -40,7 +40,7 @@ public interface WorkflowState<I> {
      * NOTE: it's readonly here for simplifying the implementation(execute can be reverted in some edge cases),
      *       We could change to support R+W if necessary.
      */
-    CommandRequest start(I input, final SearchAttributesRW searchAttributes, final SearchAttributesRW queryAttributes);
+    CommandRequest start(I input, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
 
     /**
      * Implement this method to decide what to do next when requested commands are ready
