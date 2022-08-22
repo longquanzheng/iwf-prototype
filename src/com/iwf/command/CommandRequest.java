@@ -12,6 +12,9 @@ public class CommandRequest {
         this.deciderTriggerType = deciderTriggerType;
     }
 
+    public static CommandRequest none(){
+        return new CommandRequest(null, DeciderTriggerType.ANY_COMMAND_COMPLETED);
+    }
     public static CommandRequest forAllCommandCompleted(final BaseCommand... commands) {
         return new CommandRequest(Arrays.asList(commands), DeciderTriggerType.ALL_COMMAND_COMPLETED);
     }

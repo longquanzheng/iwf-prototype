@@ -5,6 +5,7 @@ import com.iwf.attributes.SearchAttributeDef;
 import com.iwf.command.LongRunningActivityDef;
 import com.iwf.command.SignalMethodDef;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,6 +47,8 @@ public interface Workflow {
      * NOTE that there is NO regular activities in iwf. For non-long-running activities, you just implement them
      * in the workflow state APIs(start/decide).
      */
-    List<LongRunningActivityDef<?>> getLongRunningActivityTypes();
+    default List<LongRunningActivityDef<?>> getLongRunningActivityTypes(){
+        return Collections.emptyList();
+    }
 }
 

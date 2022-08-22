@@ -20,10 +20,6 @@ public class SubscriptionWorkflow implements Workflow {
     public static final String QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER = "BillingPeriodNumber";
     public static final String QUERY_ATTRIBUTE_CUSTOMER = "BillingSubscription";
 
-    public static final String SEND_WELCOME_EMAIL_ACTIVITY = "SubscriptionActivities::sendWelcomeEmail";
-    public static final String SEND_SUBSCRIPTION_OVER_EMAIL_ACTIVITY = "SubscriptionActivities::sendSubscriptionOverEmail";
-    public static final String CHARGE_CUSTOMER_ACTIVITY = "SubscriptionActivities::chargeCustomerForBillingPeriod";
-
     @Override
     public List<StateDef> getStates() {
         return Arrays.asList(
@@ -33,15 +29,6 @@ public class SubscriptionWorkflow implements Workflow {
                 new StateDef(new ChargeCurrentPeriodState(), false),
                 new StateDef(new SubscriptionOverState(), false),
                 new StateDef(new UpdateChargeAmountState(), false)
-        );
-    }
-
-    @Override
-    public List<LongRunningActivityDef<?>> getLongRunningActivityTypes() {
-        return Arrays.asList(
-                new LongRunningActivityDef<>(SEND_WELCOME_EMAIL_ACTIVITY, Void.class),
-                new LongRunningActivityDef<>(SEND_SUBSCRIPTION_OVER_EMAIL_ACTIVITY, Void.class),
-                new LongRunningActivityDef<>(CHARGE_CUSTOMER_ACTIVITY, Void.class)
         );
     }
 
