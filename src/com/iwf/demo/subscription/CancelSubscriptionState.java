@@ -26,7 +26,7 @@ public class CancelSubscriptionState implements WorkflowState<Void> {
     }
 
     @Override
-    public CommandRequest start(final Void nothing, final SearchAttributesRW searchAttributes, final SearchAttributesRW queryAttributes) {
+    public CommandRequest start(final Void nothing, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return CommandRequest.forAllCommandCompleted(
                 new SignalCommand(SubscriptionWorkflow.SIGNAL_METHOD_CANCEL_SUBSCRIPTION)
         );

@@ -33,7 +33,7 @@ class WelcomeEmailState implements WorkflowState<Customer> {
     }
 
     @Override
-    public CommandRequest start(final Customer customer, final SearchAttributesRW searchAttributes, final SearchAttributesRW queryAttributes) {
+    public CommandRequest start(final Customer customer, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return CommandRequest.forAllCommandCompleted(
                 new ActivityCommand(SEND_WELCOME_EMAIL_ACTIVITY, new ActivityOptions(30), customer)
         );

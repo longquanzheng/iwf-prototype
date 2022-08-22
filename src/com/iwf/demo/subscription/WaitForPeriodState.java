@@ -33,7 +33,7 @@ class WaitForPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public CommandRequest start(final Void nothing, final SearchAttributesRW searchAttributes, final SearchAttributesRW queryAttributes) {
+    public CommandRequest start(final Void nothing, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         final Customer customer = queryAttributes.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER);
 
         return CommandRequest.forAllCommandCompleted(
