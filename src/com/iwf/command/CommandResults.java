@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class CommandResults {
 
-    public List<ActivityCommandResult> getAllActivityCommandResults() {
+    public List<LongRunningActivityCommandResult> getAllLongRunningActivityCommandResults() {
         return null;
     }
 
@@ -27,11 +27,11 @@ public class CommandResults {
         return null;
     }
 
-    public ActivityCommandResult getActivityCommandResultByIndex(int idx) {
+    public LongRunningActivityCommandResult getActivityCommandResultByIndex(int idx) {
         return null;
     }
 
-    public ActivityCommandResult getActivityCommandResultById(String commandId) {
+    public LongRunningActivityCommandResult getActivityCommandResultById(String commandId) {
         return null;
     }
 

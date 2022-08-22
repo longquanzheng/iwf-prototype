@@ -2,7 +2,7 @@ package com.iwf;
 
 import com.iwf.attributes.QueryAttributeDef;
 import com.iwf.attributes.SearchAttributeDef;
-import com.iwf.command.ActivityDef;
+import com.iwf.command.LongRunningActivityDef;
 import com.iwf.command.SignalMethodDef;
 
 import java.util.List;
@@ -27,11 +27,6 @@ public interface Workflow {
     List<StateDef> getStates();
 
     /**
-     * defines all the activity types supported by this workflow.
-     */
-    List<ActivityDef<?>> getActivityTypes();
-
-    /**
      * defines all the signal methods supported by this workflow.
      */
     List<SignalMethodDef<?>> getSignalMethods();
@@ -45,5 +40,12 @@ public interface Workflow {
      * defines all the query attributes supported by this workflow.
      */
     List<QueryAttributeDef<?>> getQueryAttributes();
+
+    /**
+     * defines all the long running activity types supported by this workflow.
+     * NOTE that there is NO regular activities in iwf. For non-long-running activities, you just implement them
+     * in the workflow state APIs(start/decide).
+     */
+    List<LongRunningActivityDef<?>> getLongRunningActivityTypes();
 }
 

@@ -4,7 +4,7 @@ import com.iwf.StateDef;
 import com.iwf.Workflow;
 import com.iwf.attributes.QueryAttributeDef;
 import com.iwf.attributes.SearchAttributeDef;
-import com.iwf.command.ActivityDef;
+import com.iwf.command.LongRunningActivityDef;
 import com.iwf.command.SignalMethodDef;
 import com.iwf.demo.subscription.models.Customer;
 
@@ -37,11 +37,11 @@ public class SubscriptionWorkflow implements Workflow {
     }
 
     @Override
-    public List<ActivityDef<?>> getActivityTypes() {
+    public List<LongRunningActivityDef<?>> getLongRunningActivityTypes() {
         return Arrays.asList(
-                new ActivityDef<>(SEND_WELCOME_EMAIL_ACTIVITY, Void.class),
-                new ActivityDef<>(SEND_SUBSCRIPTION_OVER_EMAIL_ACTIVITY, Void.class),
-                new ActivityDef<>(CHARGE_CUSTOMER_ACTIVITY, Void.class)
+                new LongRunningActivityDef<>(SEND_WELCOME_EMAIL_ACTIVITY, Void.class),
+                new LongRunningActivityDef<>(SEND_SUBSCRIPTION_OVER_EMAIL_ACTIVITY, Void.class),
+                new LongRunningActivityDef<>(CHARGE_CUSTOMER_ACTIVITY, Void.class)
         );
     }
 

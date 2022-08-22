@@ -1,10 +1,10 @@
 package com.iwf.command;
 
-public final class ActivityDef<O> {
+public final class LongRunningActivityDef<O> {
     private String activityType;
     private Class<O> outputType;
 
-    public ActivityDef(final String activityType, final Class<O> outputType) {
+    public LongRunningActivityDef(final String activityType, final Class<O> outputType) {
         this.activityType = activityType;
         this.outputType = outputType;
     }

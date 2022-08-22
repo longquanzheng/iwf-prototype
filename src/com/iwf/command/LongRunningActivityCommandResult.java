@@ -1,6 +1,6 @@
 package com.iwf.command;
 
-public final class ActivityCommandResult {
+public final class LongRunningActivityCommandResult {
 
     private final String activityType;
     private final String activityCommandId;
@@ -9,7 +9,7 @@ public final class ActivityCommandResult {
     private final ActivityStatus activityStatus;
     private final ActivityTimeoutType activityTimeoutType;
 
-    public ActivityCommandResult(final String activityType, final String activityCommandId, final Object output, final ActivityStatus activityStatus, final ActivityTimeoutType activityTimeoutType) {
+    public LongRunningActivityCommandResult(final String activityType, final String activityCommandId, final Object output, final ActivityStatus activityStatus, final ActivityTimeoutType activityTimeoutType) {
         this.activityType = activityType;
         this.activityCommandId = activityCommandId;
         this.output = output;
