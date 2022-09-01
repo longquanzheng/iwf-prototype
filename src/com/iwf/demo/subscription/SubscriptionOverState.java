@@ -6,13 +6,13 @@ import com.iwf.attributes.QueryAttributesRO;
 import com.iwf.attributes.QueryAttributesRW;
 import com.iwf.attributes.SearchAttributesRO;
 import com.iwf.attributes.SearchAttributesRW;
+import com.iwf.attributes.StateLocalAttributesR;
+import com.iwf.attributes.StateLocalAttributesW;
 import com.iwf.command.ActivityCommand;
 import com.iwf.command.ActivityOptions;
 import com.iwf.command.CommandRequest;
 import com.iwf.command.CommandResults;
 import com.iwf.demo.subscription.models.Customer;
-
-import static com.iwf.demo.subscription.SubscriptionWorkflow.SEND_SUBSCRIPTION_OVER_EMAIL_ACTIVITY;
 
 class SubscriptionOverState implements WorkflowState<Void> {
 
@@ -29,7 +29,7 @@ class SubscriptionOverState implements WorkflowState<Void> {
     }
 
     @Override
-    public CommandRequest start(final Void nothing, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
+    public CommandRequest start(final Void nothing, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         final Customer customer = queryAttributes.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER);
         // invoke API here to send subscription over email.
         // control the timeout by customizing the WorkflowStateOptions
@@ -37,7 +37,7 @@ class SubscriptionOverState implements WorkflowState<Void> {
     }
 
     @Override
-    public StateDecision decide(final Void nothing, final CommandResults commandResults,
+    public StateDecision decide(final Void nothing, final CommandResults commandResults,final StateLocalAttributesR stateLocals,
                                 final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return StateDecision.COMPLETING_WORKFLOW;
     }

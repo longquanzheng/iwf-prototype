@@ -7,6 +7,8 @@ import com.iwf.attributes.QueryAttributesRO;
 import com.iwf.attributes.QueryAttributesRW;
 import com.iwf.attributes.SearchAttributesRO;
 import com.iwf.attributes.SearchAttributesRW;
+import com.iwf.attributes.StateLocalAttributesR;
+import com.iwf.attributes.StateLocalAttributesW;
 import com.iwf.command.ActivityCommand;
 import com.iwf.command.ActivityOptions;
 import com.iwf.command.CommandRequest;
@@ -30,7 +32,7 @@ class ChargeCurrentPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public CommandRequest start(final Void nothing, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttribute) {
+    public CommandRequest start(final Void nothing, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttribute) {
         final Customer customer = searchAttributes.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER);
         final int currentPeriod = queryAttribute.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER);
         // invoke API here to chart the user
@@ -39,7 +41,7 @@ class ChargeCurrentPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public StateDecision decide(final Void nothing, final CommandResults commandResults,
+    public StateDecision decide(final Void nothing, final CommandResults commandResults, final StateLocalAttributesR stateLocals,
                                 final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return new StateDecision(
                 new StateMovement(WF_STATE_WAIT_FOR_NEXT_PERIOD)

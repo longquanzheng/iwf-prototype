@@ -5,6 +5,8 @@ import com.iwf.attributes.QueryAttributesRO;
 import com.iwf.attributes.QueryAttributesRW;
 import com.iwf.attributes.SearchAttributesRO;
 import com.iwf.attributes.SearchAttributesRW;
+import com.iwf.attributes.StateLocalAttributesR;
+import com.iwf.attributes.StateLocalAttributesW;
 import com.iwf.command.CommandCarryOverPolicy;
 import com.iwf.command.CommandRequest;
 import com.iwf.command.CommandResults;
@@ -40,7 +42,7 @@ public interface WorkflowState<I> {
      * NOTE: it's readonly here for simplifying the implementation(execute can be reverted in some edge cases),
      *       We could change to support R+W if necessary.
      */
-    CommandRequest start(I input, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
+    CommandRequest start(I input, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
 
     /**
      * Implement this method to decide what to do next when requested commands are ready
@@ -51,7 +53,7 @@ public interface WorkflowState<I> {
      * @param searchAttributes the search attributes that can be used as Read+Write
      * @return the decision of what to do next(e.g. transition to next states)
      */
-    StateDecision decide(final I input, final CommandResults commandResults,
+    StateDecision decide(final I input, final CommandResults commandResults, final StateLocalAttributesR stateLocals,
                          final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
 }
 
