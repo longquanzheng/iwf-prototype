@@ -1,5 +1,6 @@
 package com.iwf.demo.subscription;
 
+import com.iwf.Context;
 import com.iwf.StateDecision;
 import com.iwf.StateMovement;
 import com.iwf.WorkflowState;
@@ -35,7 +36,7 @@ class WaitForPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public CommandRequest start(final Void nothing, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
+    public CommandRequest start(final Context context, final Void nothing, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         final Customer customer = queryAttributes.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER);
 
         return CommandRequest.forAllCommandCompleted(
@@ -44,7 +45,7 @@ class WaitForPeriodState implements WorkflowState<Void> {
     }
 
     @Override
-    public StateDecision decide(final Void nothing, final CommandResults commandResults,final StateLocalAttributesR stateLocals,
+    public StateDecision decide(final Context context,final Void nothing, final CommandResults commandResults,final StateLocalAttributesR stateLocals,
                                 final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         ArrayList<StateMovement> nextStates = new ArrayList();
         final Customer customer = queryAttributes.get(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER);

@@ -1,5 +1,6 @@
 package com.iwf.demo.subscription;
 
+import com.iwf.Context;
 import com.iwf.StateDecision;
 import com.iwf.StateMovement;
 import com.iwf.WorkflowState;
@@ -29,14 +30,14 @@ class UpdateChargeAmountState implements WorkflowState<Void> {
     }
 
     @Override
-    public CommandRequest start(final Void nothing, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttribute) {
+    public CommandRequest start(final Context context, final Void nothing, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttribute) {
         return CommandRequest.forAllCommandCompleted(
                 new SignalCommand(SubscriptionWorkflow.SIGNAL_METHOD_UPDATE_BILLING_PERIOD_CHARGE_AMOUNT)
         );
     }
 
     @Override
-    public StateDecision decide(final Void nothing, final CommandResults commandResults,final StateLocalAttributesR stateLocals,
+    public StateDecision decide(final Context context,final Void nothing, final CommandResults commandResults,final StateLocalAttributesR stateLocals,
                                 final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
 
         final int newAmount = commandResults.getSignalValueByIndex(0);

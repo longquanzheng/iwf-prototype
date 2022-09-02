@@ -42,7 +42,9 @@ public interface WorkflowState<I> {
      * NOTE: it's readonly here for simplifying the implementation(execute can be reverted in some edge cases),
      *       We could change to support R+W if necessary.
      */
-    CommandRequest start(I input, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
+    CommandRequest start(
+            final Context context, I input,
+            final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
 
     /**
      * Implement this method to decide what to do next when requested commands are ready
@@ -53,8 +55,9 @@ public interface WorkflowState<I> {
      * @param searchAttributes the search attributes that can be used as Read+Write
      * @return the decision of what to do next(e.g. transition to next states)
      */
-    StateDecision decide(final I input, final CommandResults commandResults, final StateLocalAttributesR stateLocals,
-                         final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
+    StateDecision decide(
+            final Context context, final I input, final CommandResults commandResults,
+            final StateLocalAttributesR stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes);
 }
 
 

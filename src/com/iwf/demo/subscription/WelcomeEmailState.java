@@ -1,5 +1,6 @@
 package com.iwf.demo.subscription;
 
+import com.iwf.Context;
 import com.iwf.StateDecision;
 import com.iwf.StateMovement;
 import com.iwf.WorkflowState;
@@ -34,14 +35,14 @@ class WelcomeEmailState implements WorkflowState<Customer> {
     }
 
     @Override
-    public CommandRequest start(final Customer customer, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
+    public CommandRequest start(final Context context, final Customer customer, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         // invoke API here to send subscription start email.
         // control the timeout by customizing the WorkflowStateOptions
         return CommandRequest.none();
     }
 
     @Override
-    public StateDecision decide(final Customer customer, final CommandResults commandResults, final StateLocalAttributesR stateLocals,
+    public StateDecision decide(final Context context,final Customer customer, final CommandResults commandResults, final StateLocalAttributesR stateLocals,
                                 final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         queryAttributes.upsert(SubscriptionWorkflow.QUERY_ATTRIBUTE_BILLING_PERIOD_NUMBER, 0); // starting from 0
         queryAttributes.upsert(SubscriptionWorkflow.QUERY_ATTRIBUTE_CUSTOMER, customer);

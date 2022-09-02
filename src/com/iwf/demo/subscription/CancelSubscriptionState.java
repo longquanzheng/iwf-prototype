@@ -1,5 +1,6 @@
 package com.iwf.demo.subscription;
 
+import com.iwf.Context;
 import com.iwf.StateDecision;
 import com.iwf.WorkflowState;
 import com.iwf.attributes.QueryAttributesRO;
@@ -28,14 +29,14 @@ public class CancelSubscriptionState implements WorkflowState<Void> {
     }
 
     @Override
-    public CommandRequest start(final Void nothing, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
+    public CommandRequest start(final Context context, final Void nothing, final StateLocalAttributesW stateLocals, final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return CommandRequest.forAllCommandCompleted(
                 new SignalCommand(SubscriptionWorkflow.SIGNAL_METHOD_CANCEL_SUBSCRIPTION)
         );
     }
 
     @Override
-    public StateDecision decide(final Void nothing, final CommandResults commandResults,final StateLocalAttributesR stateLocals,
+    public StateDecision decide(final Context context,final Void nothing, final CommandResults commandResults,final StateLocalAttributesR stateLocals,
                                 final SearchAttributesRW searchAttributes, final QueryAttributesRW queryAttributes) {
         return COMPLETING_WORKFLOW;
     }
